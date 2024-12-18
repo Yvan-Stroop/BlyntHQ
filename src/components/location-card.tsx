@@ -10,7 +10,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { cn, normalizeUrlCity } from "@/lib/utils"
 
 interface LocationCardProps {
   location: {
@@ -39,7 +39,7 @@ export function LocationCard({
   showCategories = true,
   className 
 }: LocationCardProps) {
-  const citySlug = location.city.toLowerCase().replace(/\s+/g, '-');
+  const citySlug = normalizeUrlCity(location.city);
   const stateSlug = location.state_abbr.toLowerCase();
   const locationUrl = `/${stateSlug}/${citySlug}`;
 

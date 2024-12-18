@@ -102,6 +102,6 @@ export const STATE_ABBR_MAP: { [key: string]: string } = {
     const stateSlug = state.toLowerCase();
     if (!city) return `/${stateSlug}`;
     
-    const citySlug = city.toLowerCase().replace(/\s+/g, '-');
+    const citySlug = normalizeUrlCity(city);
     return `/${stateSlug}/${citySlug}`;
   } 

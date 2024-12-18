@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
 import { useCallback } from "react"
+import { normalizeUrlCity } from "@/lib/utils"
 
 interface City {
   name: string;
@@ -52,8 +53,8 @@ export function CitiesList({
   )
 
   // Memoize the URL generator
-  const generateCityUrl = useCallback((citySlug: string) => 
-    `/categories/${category.slug}/${state.abbr.toLowerCase()}/${citySlug}`,
+  const generateCityUrl = useCallback((city: City) => 
+    `/categories/${category.slug}/${state.abbr.toLowerCase()}/${normalizeUrlCity(city.name)}`,
     [category.slug, state.abbr]
   )
 
@@ -104,7 +105,7 @@ export function CitiesList({
               {groupedCities[letter].map((city) => (
                 <Link
                   key={city.slug}
-                  href={generateCityUrl(city.slug)}
+                  href={generateCityUrl(city)}
                   className="group flex items-center justify-between py-2 px-3 rounded-md hover:bg-accent"
                 >
                   <div className="flex items-center gap-3">

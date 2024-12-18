@@ -24,14 +24,18 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
-  async rewrites() {
-    return [
-      {
-        source: '/favicon.ico',
-        destination: '/favicon/favicon-32x32.png',
-      },
-    ]
-  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.csv$/,
+      loader: 'csv-loader',
+      options: {
+        dynamicTyping: true,
+        header: true,
+        skipEmptyLines: true
+      }
+    })
+    return config
+  }
 }
 
 module.exports = nextConfig

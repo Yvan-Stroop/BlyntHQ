@@ -1,0 +1,241 @@
+id,category,city,state,fetched_at
+412,air conditioning repair service,downers grove,Illinois,2024-12-03 18:19:26.4+00
+413,baby store,downers grove,Illinois,2024-12-03 18:22:26.01+00
+414,beauty salon,downers grove,Illinois,2024-12-03 18:26:13.973+00
+415,construction company,downers grove,Illinois,2024-12-04 10:53:19.182+00
+416,dental clinic,downers grove,Illinois,2024-12-04 10:57:29.152+00
+417,dollar store,downers grove,Illinois,2024-12-04 10:59:02.512+00
+418,family law attorney,downers grove,Illinois,2024-12-04 11:00:47.997+00
+419,fitness center,downers grove,Illinois,2024-12-04 11:01:37.938+00
+420,funeral home,downers grove,Illinois,2024-12-04 11:01:54.831+00
+421,general practice attorney,downers grove,Illinois,2024-12-04 11:05:09.589+00
+422,gutter cleaning service,downers grove,Illinois,2024-12-04 11:06:03.614+00
+423,hairdresser,downers grove,Illinois,2024-12-04 11:06:31.156+00
+424,insurance company,downers grove,Illinois,2024-12-04 11:09:08.71+00
+425,law firm,downers grove,Illinois,2024-12-04 11:12:17.925+00
+426,liquor store,downers grove,Illinois,2024-12-04 11:12:40.447+00
+427,mechanic,downers grove,Illinois,2024-12-04 11:13:28.638+00
+428,supermarket,downers grove,Illinois,2024-12-04 11:14:51.363+00
+429,tire shop,downers grove,Illinois,2024-12-04 11:17:11.751+00
+430,wedding venue,downers grove,Illinois,2024-12-04 11:17:34.612+00
+431,window cleaning service,downers grove,Illinois,2024-12-04 11:19:57.89+00
+432,fitness center,azusa,California,2024-12-04 13:13:07.221+00
+433,air conditioning repair service,azusa,California,2024-12-04 13:16:16.823+00
+434,baby store,azusa,California,2024-12-04 13:18:50.465+00
+435,beauty salon,azusa,California,2024-12-04 13:20:37.583+00
+436,construction company,azusa,California,2024-12-04 13:22:06.26+00
+437,dental clinic,azusa,California,2024-12-04 13:23:29.315+00
+438,dollar store,azusa,California,2024-12-04 13:25:01.845+00
+439,family law attorney,azusa,California,2024-12-04 13:26:46.296+00
+440,funeral home,azusa,California,2024-12-04 13:27:14.983+00
+441,general practice attorney,azusa,California,2024-12-04 13:29:07.154+00
+442,gutter cleaning service,azusa,California,2024-12-04 13:29:36.714+00
+443,hairdresser,azusa,California,2024-12-04 13:30:36.453+00
+444,insurance company,azusa,California,2024-12-04 13:32:12.649+00
+445,law firm,azusa,California,2024-12-04 13:32:59.962+00
+446,liquor store,azusa,California,2024-12-04 13:33:58.054+00
+447,mechanic,azusa,California,2024-12-04 13:35:02.464+00
+448,supermarket,azusa,California,2024-12-04 13:35:35.317+00
+449,tire shop,azusa,California,2024-12-04 13:36:07.427+00
+450,wedding venue,azusa,California,2024-12-04 13:37:13.081+00
+451,window cleaning service,azusa,California,2024-12-04 13:40:32.311+00
+452,air conditioning repair service,cypress,California,2024-12-04 13:41:30.637+00
+453,baby store,cypress,California,2024-12-04 13:42:17.301+00
+454,beauty salon,cypress,California,2024-12-04 13:42:50.801+00
+455,construction company,cypress,California,2024-12-04 13:44:51.242+00
+456,dental clinic,cypress,California,2024-12-04 13:45:49.513+00
+457,dollar store,cypress,California,2024-12-04 13:46:55.172+00
+458,family law attorney,cypress,California,2024-12-04 13:47:48.632+00
+459,fitness center,cypress,California,2024-12-04 13:49:21.131+00
+460,funeral home,cypress,California,2024-12-04 13:49:41.443+00
+461,general practice attorney,cypress,California,2024-12-04 13:50:29.152+00
+462,gutter cleaning service,cypress,California,2024-12-04 13:50:53.211+00
+463,hairdresser,cypress,California,2024-12-04 13:51:21.782+00
+464,insurance company,cypress,California,2024-12-04 13:52:04.249+00
+465,law firm,cypress,California,2024-12-04 13:52:40.249+00
+466,liquor store,cypress,California,2024-12-04 13:52:59.787+00
+467,mechanic,cypress,California,2024-12-04 13:53:32.688+00
+468,supermarket,cypress,California,2024-12-04 13:54:16.743+00
+469,tire shop,cypress,California,2024-12-04 13:54:47.679+00
+470,wedding venue,cypress,California,2024-12-04 13:55:34.608+00
+471,window cleaning service,cypress,California,2024-12-04 13:56:50.914+00
+472,air conditioning repair service,florin,California,2024-12-04 13:57:46.457+00
+473,baby store,florin,California,2024-12-04 13:58:30.568+00
+474,beauty salon,florin,California,2024-12-04 13:58:54.848+00
+475,construction company,florin,California,2024-12-04 14:03:16.384+00
+476,dental clinic,florin,California,2024-12-04 14:05:32.109+00
+477,dollar store,florin,California,2024-12-04 14:06:11.956+00
+478,family law attorney,florin,California,2024-12-04 14:09:52.664+00
+479,fitness center,florin,California,2024-12-04 14:10:16.128+00
+480,funeral home,florin,California,2024-12-04 14:11:06.07+00
+481,general practice attorney,florin,California,2024-12-04 14:11:41.223+00
+482,gutter cleaning service,florin,California,2024-12-04 14:12:05.417+00
+483,hairdresser,florin,California,2024-12-04 14:12:36.62+00
+484,insurance company,florin,California,2024-12-04 14:13:17.225+00
+485,law firm,florin,California,2024-12-04 14:13:46.199+00
+486,liquor store,florin,California,2024-12-04 14:14:17.136+00
+487,mechanic,florin,California,2024-12-04 14:14:49.874+00
+488,supermarket,florin,California,2024-12-04 14:15:27.883+00
+489,tire shop,florin,California,2024-12-04 14:16:01.715+00
+490,wedding venue,florin,California,2024-12-04 14:16:29.933+00
+491,window cleaning service,florin,California,2024-12-04 14:17:18.412+00
+492,air conditioning repair service,coral gables,Florida,2024-12-04 14:19:20.516+00
+493,baby store,coral gables,Florida,2024-12-04 14:19:53.346+00
+494,beauty salon,coral gables,Florida,2024-12-04 14:20:31.903+00
+495,construction company,coral gables,Florida,2024-12-04 14:21:32.264+00
+496,dental clinic,coral gables,Florida,2024-12-04 14:21:54.73+00
+497,dollar store,coral gables,Florida,2024-12-04 14:23:03.823+00
+498,family law attorney,coral gables,Florida,2024-12-04 14:23:37.548+00
+499,fitness center,coral gables,Florida,2024-12-04 14:23:58.299+00
+500,funeral home,coral gables,Florida,2024-12-04 14:24:26.094+00
+501,general practice attorney,coral gables,Florida,2024-12-04 14:25:11.657+00
+502,gutter cleaning service,coral gables,Florida,2024-12-04 14:25:33.802+00
+503,hairdresser,coral gables,Florida,2024-12-04 14:26:10.35+00
+504,insurance company,coral gables,Florida,2024-12-04 14:26:37.86+00
+505,law firm,coral gables,Florida,2024-12-04 14:27:07.598+00
+506,liquor store,coral gables,Florida,2024-12-04 14:27:40.917+00
+507,mechanic,coral gables,Florida,2024-12-04 14:28:21.502+00
+508,supermarket,coral gables,Florida,2024-12-04 14:28:59.983+00
+509,tire shop,coral gables,Florida,2024-12-04 14:29:32.603+00
+510,wedding venue,coral gables,Florida,2024-12-04 14:30:08.632+00
+511,window cleaning service,coral gables,Florida,2024-12-04 13:31:23+00
+512,air conditioning repair service,jeffersonville,Indiana,2024-12-04 14:31:27.409+00
+513,baby store,jeffersonville,Indiana,2024-12-04 14:32:13.825+00
+514,beauty salon,jeffersonville,Indiana,2024-12-04 14:39:12.428+00
+515,construction company,jeffersonville,Indiana,2024-12-04 14:39:35.06+00
+516,dental clinic,jeffersonville,Indiana,2024-12-04 14:40:06.191+00
+517,dollar store,jeffersonville,Indiana,2024-12-04 14:40:24.327+00
+518,family law attorney,jeffersonville,Indiana,2024-12-04 14:40:55.499+00
+519,fitness center,jeffersonville,Indiana,2024-12-04 14:41:14.374+00
+520,funeral home,jeffersonville,Indiana,2024-12-04 14:41:37.56+00
+521,general practice attorney,jeffersonville,Indiana,2024-12-04 14:42:03.417+00
+522,gutter cleaning service,jeffersonville,Indiana,2024-12-04 14:43:04.808+00
+523,hairdresser,jeffersonville,Indiana,2024-12-04 14:43:42.383+00
+524,insurance company,jeffersonville,Indiana,2024-12-04 14:44:13.44+00
+525,law firm,jeffersonville,Indiana,2024-12-04 14:45:04.146+00
+526,liquor store,jeffersonville,Indiana,2024-12-04 14:45:24.215+00
+527,mechanic,jeffersonville,Indiana,2024-12-04 14:45:52.789+00
+528,supermarket,jeffersonville,Indiana,2024-12-04 14:46:20.454+00
+529,tire shop,jeffersonville,Indiana,2024-12-04 14:46:49.897+00
+530,wedding venue,jeffersonville,Indiana,2024-12-04 14:47:15.746+00
+531,window cleaning service,jeffersonville,Indiana,2024-12-04 14:47:34.319+00
+532,air conditioning repair service,north bethesda,Maryland,2024-12-04 14:48:16.075+00
+533,baby store,north bethesda,Maryland,2024-12-04 14:48:46.51+00
+534,beauty salon,north bethesda,Maryland,2024-12-04 14:49:10.407+00
+535,construction company,north bethesda,Maryland,2024-12-04 14:49:48.239+00
+536,dental clinic,north bethesda,Maryland,2024-12-04 14:50:12.858+00
+537,dollar store,north bethesda,Maryland,2024-12-04 14:51:02.241+00
+538,family law attorney,north bethesda,Maryland,2024-12-04 14:51:57.778+00
+539,fitness center,north bethesda,Maryland,2024-12-04 14:52:34.981+00
+540,funeral home,north bethesda,Maryland,2024-12-04 14:53:03.032+00
+541,general practice attorney,north bethesda,Maryland,2024-12-04 14:53:39.68+00
+542,gutter cleaning service,north bethesda,Maryland,2024-12-04 14:54:20.298+00
+543,hairdresser,north bethesda,Maryland,2024-12-04 14:54:46.662+00
+544,insurance company,north bethesda,Maryland,2024-12-04 14:55:15.153+00
+545,law firm,north bethesda,Maryland,2024-12-04 14:56:07.613+00
+546,liquor store,north bethesda,Maryland,2024-12-04 14:56:47.253+00
+547,mechanic,north bethesda,Maryland,2024-12-04 14:57:10.506+00
+548,supermarket,north bethesda,Maryland,2024-12-04 14:57:40.458+00
+549,tire shop,north bethesda,Maryland,2024-12-04 14:58:08.135+00
+550,wedding venue,north bethesda,Maryland,2024-12-04 14:58:40.516+00
+551,window cleaning service,north bethesda,Maryland,2024-12-04 14:59:13.601+00
+552,air conditioning repair service,st. louis park,Minnesota,2024-12-04 14:59:54.967+00
+553,baby store,st. louis park,Minnesota,2024-12-04 15:00:49.706+00
+554,beauty salon,st. louis park,Minnesota,2024-12-04 15:01:18.794+00
+555,construction company,st. louis park,Minnesota,2024-12-04 15:02:04.311+00
+556,dental clinic,st. louis park,Minnesota,2024-12-04 15:02:27.059+00
+557,dollar store,st. louis park,Minnesota,2024-12-04 15:02:51.499+00
+558,family law attorney,st. louis park,Minnesota,2024-12-04 15:03:52.389+00
+559,fitness center,st. louis park,Minnesota,2024-12-04 15:04:16.658+00
+560,funeral home,st. louis park,Minnesota,2024-12-04 15:04:55.114+00
+561,general practice attorney,st. louis park,Minnesota,2024-12-04 15:05:15.189+00
+562,gutter cleaning service,st. louis park,Minnesota,2024-12-04 15:05:35.531+00
+563,hairdresser,st. louis park,Minnesota,2024-12-04 15:06:10.318+00
+564,insurance company,st. louis park,Minnesota,2024-12-04 15:06:43.015+00
+565,law firm,st. louis park,Minnesota,2024-12-04 15:07:12.013+00
+566,liquor store,st. louis park,Minnesota,2024-12-04 15:07:42.268+00
+567,mechanic,st. louis park,Minnesota,2024-12-04 15:08:07.85+00
+568,supermarket,st. louis park,Minnesota,2024-12-04 15:08:34.608+00
+569,tire shop,st. louis park,Minnesota,2024-12-04 15:09:23.253+00
+570,wedding venue,st. louis park,Minnesota,2024-12-04 15:09:49.149+00
+571,window cleaning service,st. louis park,Minnesota,2024-12-04 15:10:25.709+00
+572,air conditioning repair service,chesterfield,Missouri,2024-12-04 15:10:53.277+00
+573,baby store,chesterfield,Missouri,2024-12-04 15:11:15.664+00
+574,beauty salon,chesterfield,Missouri,2024-12-04 15:11:40.172+00
+575,construction company,chesterfield,Missouri,2024-12-04 15:12:05.55+00
+576,dental clinic,chesterfield,Missouri,2024-12-04 15:12:24.423+00
+577,dollar store,chesterfield,Missouri,2024-12-04 15:12:38.777+00
+578,family law attorney,chesterfield,Missouri,2024-12-04 15:13:01.833+00
+579,fitness center,chesterfield,Missouri,2024-12-04 15:13:20.288+00
+580,funeral home,chesterfield,Missouri,2024-12-04 15:13:33.847+00
+581,general practice attorney,chesterfield,Missouri,2024-12-04 15:13:58.099+00
+582,gutter cleaning service,chesterfield,Missouri,2024-12-04 15:14:19.794+00
+583,hairdresser,chesterfield,Missouri,2024-12-04 15:14:45.364+00
+584,insurance company,chesterfield,Missouri,2024-12-04 15:15:11.385+00
+585,law firm,chesterfield,Missouri,2024-12-04 15:15:34.298+00
+586,liquor store,chesterfield,Missouri,2024-12-04 15:16:18.598+00
+587,mechanic,chesterfield,Missouri,2024-12-04 15:16:49.65+00
+588,supermarket,chesterfield,Missouri,2024-12-04 15:17:21.483+00
+589,tire shop,chesterfield,Missouri,2024-12-04 15:17:45.895+00
+590,wedding venue,chesterfield,Missouri,2024-12-04 15:18:02.109+00
+591,window cleaning service,chesterfield,Missouri,2024-12-04 15:18:28.951+00
+592,air conditioning repair service,mclean,Virginia,2024-12-04 15:19:01.422+00
+593,baby store,mclean,Virginia,2024-12-04 15:19:20.465+00
+594,beauty salon,mclean,Virginia,2024-12-04 15:19:40.084+00
+595,construction company,mclean,Virginia,2024-12-04 15:20:06.173+00
+596,dental clinic,mclean,Virginia,2024-12-04 15:20:23.668+00
+597,dollar store,mclean,Virginia,2024-12-04 15:20:41.747+00
+598,family law attorney,mclean,Virginia,2024-12-04 15:21:15.524+00
+599,fitness center,mclean,Virginia,2024-12-04 15:22:05.167+00
+600,funeral home,mclean,Virginia,2024-12-04 15:22:42.232+00
+601,general practice attorney,mclean,Virginia,2024-12-04 15:23:17.857+00
+602,gutter cleaning service,mclean,Virginia,2024-12-04 15:23:37.564+00
+603,hairdresser,mclean,Virginia,2024-12-04 15:24:01.336+00
+604,insurance company,mclean,Virginia,2024-12-04 15:24:29.473+00
+605,law firm,mclean,Virginia,2024-12-04 15:24:51.631+00
+606,liquor store,mclean,Virginia,2024-12-04 15:25:08.079+00
+607,mechanic,mclean,Virginia,2024-12-04 15:25:30.828+00
+608,supermarket,mclean,Virginia,2024-12-04 15:25:49.724+00
+609,tire shop,mclean,Virginia,2024-12-04 15:26:16.196+00
+610,wedding venue,mclean,Virginia,2024-12-04 15:26:35.563+00
+611,window cleaning service,mclean,Virginia,2024-12-04 15:26:58.997+00
+1537,air conditioning repair service,mooresville,North Carolina,2024-12-12 15:04:32.872+00
+1538,baby store,mooresville,North Carolina,2024-12-12 15:05:20.47+00
+1539,beauty salon,mooresville,North Carolina,2024-12-12 15:05:43.242+00
+1540,construction company,mooresville,North Carolina,2024-12-12 15:06:16.3+00
+1541,dental clinic,mooresville,North Carolina,2024-12-12 15:06:43.486+00
+1542,dollar store,mooresville,North Carolina,2024-12-12 15:07:14.796+00
+1543,family law attorney,mooresville,North Carolina,2024-12-12 15:07:50.878+00
+1544,fitness center,mooresville,North Carolina,2024-12-12 15:08:13.007+00
+1545,funeral home,mooresville,North Carolina,2024-12-12 15:08:30.701+00
+1546,general practice attorney,mooresville,North Carolina,2024-12-12 15:08:55.935+00
+1547,gutter cleaning service,mooresville,North Carolina,2024-12-12 15:09:34.439+00
+1548,hairdresser,mooresville,North Carolina,2024-12-12 15:09:59.2+00
+1549,insurance company,mooresville,North Carolina,2024-12-12 15:10:28.165+00
+1550,law firm,mooresville,North Carolina,2024-12-12 15:10:50.716+00
+1551,liquor store,mooresville,North Carolina,2024-12-12 15:11:20.096+00
+1552,mechanic,mooresville,North Carolina,2024-12-12 15:11:38.445+00
+1553,supermarket,mooresville,North Carolina,2024-12-12 15:11:59.108+00
+1554,tire shop,mooresville,North Carolina,2024-12-12 15:12:34.968+00
+1593,wedding venue,mooresville,North Carolina,2024-12-13 16:39:25.591+00
+1624,window cleaning service,mooresville,North Carolina,2024-12-15 16:51:48.238+00
+1638,air conditioning repair service,st louis park,Minnesota,2024-12-15 19:10:06.26+00
+1639,baby store,st louis park,Minnesota,2024-12-15 19:38:46.135734+00
+1640,beauty salon,st louis park,Minnesota,2024-12-15 19:39:09.369851+00
+1641,construction company,st louis park,Minnesota,2024-12-15 19:39:35.736821+00
+1642,dental clinic,st louis park,Minnesota,2024-12-15 19:39:57.539163+00
+1643,dollar store,st louis park,Minnesota,2024-12-15 19:40:16.736229+00
+1644,family law attorney,st louis park,Minnesota,2024-12-15 19:40:41.921223+00
+1645,fitness center,st louis park,Minnesota,2024-12-15 19:41:02.177521+00
+1646,funeral home,st louis park,Minnesota,2024-12-15 19:41:22.72417+00
+1647,general practice attorney,st louis park,Minnesota,2024-12-15 19:41:45.603187+00
+1648,gutter cleaning service,st louis park,Minnesota,2024-12-15 19:42:04.846687+00
+1649,hairdresser,st louis park,Minnesota,2024-12-15 19:42:19.252196+00
+1650,insurance company,st louis park,Minnesota,2024-12-15 19:42:44.799171+00
+1651,law firm,st louis park,Minnesota,2024-12-15 19:43:00.742409+00
+1652,liquor store,st louis park,Minnesota,2024-12-15 19:43:16.902889+00
+1653,mechanic,st louis park,Minnesota,2024-12-15 19:43:32.984198+00
+1654,supermarket,st louis park,Minnesota,2024-12-15 19:43:59.465918+00
+1655,tire shop,st louis park,Minnesota,2024-12-15 19:44:24.744014+00
+1656,wedding venue,st louis park,Minnesota,2024-12-15 19:44:43.372148+00
+1657,window cleaning service,st louis park,Minnesota,2024-12-15 19:44:58.536524+00

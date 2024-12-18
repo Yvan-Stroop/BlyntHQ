@@ -3,7 +3,7 @@ import { fetchLocalbusiness, storeBusinessInSupabase } from '@/lib/dataforseo'
 import type { Business, DataForSEOResponse } from '@/types/dataforseo'
 import { readFileSync } from 'fs'
 import { parse } from 'csv-parse/sync'
-import { generateUniqueSlug } from '@/lib/utils'
+import { generateUniqueSlug, normalizeUrlCity } from '@/lib/utils'
 import { loadCategoriesFromCSV } from '@/lib/csv'
 import { cache } from 'react'
 import path from 'path'
@@ -43,7 +43,7 @@ async function hasBeenFetched(category: string, city: string, state: string): Pr
     .from('category_location_fetches')
     .select('id')
     .eq('category', category.toLowerCase())
-    .eq('city', city.toLowerCase())
+    .eq('city', normalizeUrlCity(city))
     .eq('state', state.toUpperCase())
     .single()
 
@@ -60,7 +60,7 @@ async function markAsFetched(category: string, city: string, state: string): Pro
     .from('category_location_fetches')
     .upsert({
       category: category.toLowerCase(),
-      city: city.toLowerCase(),
+      city: normalizeUrlCity(city),
       state: state.toUpperCase(),
       fetched_at: new Date().toISOString()
     })
@@ -77,7 +77,7 @@ function getLocationData(city: string, stateAbbr: string): { city: string; state
     const records = parse(csvContent, { columns: true });
     
     const location = records.find((record: any) => 
-      record.city.toLowerCase() === city.toLowerCase() && 
+      normalizeUrlCity(record.city) === normalizeUrlCity(city) && 
       record.state_abbr.toUpperCase() === stateAbbr.toUpperCase()
     );
 

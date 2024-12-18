@@ -9,6 +9,7 @@ import {
 } from '@tabler/icons-react'
 import Link from 'next/link'
 import { Breadcrumbs } from '@/components/breadcrumbs'
+import { normalizeUrlCity } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Browse Locations - Find Local Businesses Across the United States',
@@ -111,7 +112,7 @@ export default async function LocationsPage() {
                         .map((city, index, array) => (
                           <Link
                             key={city.city}
-                            href={`/locations/${state.abbr.toLowerCase()}/${city.city.toLowerCase().replace(/\s+/g, '-')}`}
+                            href={`/locations/${state.abbr.toLowerCase()}/${normalizeUrlCity(city.city)}`}
                             className="text-sm text-muted-foreground hover:text-primary"
                           >
                             {city.city}

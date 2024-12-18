@@ -1,6 +1,7 @@
 import { loadCategoriesFromCSV, loadLocationsFromCSV } from './csv'
 import { supabase } from './supabase'
 import { BASE_URL, SITEMAP_CONFIG } from './config'
+import { normalizeUrlCity } from './utils'
 
 export interface SitemapUrl {
   loc: string;
@@ -91,7 +92,7 @@ async function getLocationUrls(): Promise<SitemapUrl[]> {
   const currentDate = new Date().toISOString()
 
   return locations.map(location => {
-    const citySlug = location.city.toLowerCase().replace(/\s+/g, '-')
+    const citySlug = normalizeUrlCity(location.city)
     return {
       loc: `${BASE_URL}/locations/${location.state_abbr.toLowerCase()}/${citySlug}`,
       lastmod: currentDate,

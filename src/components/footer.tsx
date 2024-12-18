@@ -7,6 +7,7 @@ import { IconChevronDown, IconShieldCheck, IconBuildingStore, IconMapPin, IconCa
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import { normalizeUrlCity } from "@/lib/utils"
 
 interface FooterProps {
   categories?: Array<{
@@ -124,7 +125,7 @@ export function Footer({ categories = [], locations = [] }: FooterProps) {
                     {cities.slice(0, 3).map((location) => (
                       <li key={`${location.city}-${location.state_abbr}`}>
                         <Link 
-                          href={`/locations/${location.state_abbr.toLowerCase()}/${location.city.toLowerCase().replace(/\s+/g, '-')}`}
+                          href={`/locations/${location.state_abbr.toLowerCase()}/${normalizeUrlCity(location.city)}`}
                           className="text-sm text-muted-foreground hover:text-primary transition-colors"
                           title={`Find businesses in ${location.city}, ${location.state_abbr}`}
                         >

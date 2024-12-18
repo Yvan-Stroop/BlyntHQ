@@ -13,7 +13,7 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { LocationSearch, LocationSearchProps } from "@/components/location-search"
-import { cn } from "@/lib/utils"
+import { cn, normalizeUrlCity } from "@/lib/utils"
 
 interface CategoryHeroProps {
   category: {
@@ -100,7 +100,7 @@ export function CategoryHero({ category, content, popularLocations = [], states,
                 {popularLocations.slice(0, 5).map((location) => (
                   <Link
                     key={`${location.city}-${location.state_abbr}`}
-                    href={`/categories/${category.slug}/${location.state_abbr.toLowerCase()}/${location.city.toLowerCase().replace(/\s+/g, '-')}`}
+                    href={`/categories/${category.slug}/${location.state_abbr.toLowerCase()}/${normalizeUrlCity(location.city)}`}
                     className="group"
                   >
                     <Badge variant="secondary" className="gap-1.5">

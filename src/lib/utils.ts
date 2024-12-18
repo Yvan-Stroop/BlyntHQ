@@ -17,6 +17,88 @@ export function formatPhoneNumber(phoneNumber: string): string {
   return phoneNumber
 }
 
+/**
+ * Normalizes a business title for use in URLs.
+ * Handles special characters, removes common business suffixes, and normalizes spacing.
+ */
+function normalizeBusinessTitle(title: string): string {
+  return title
+    .toLowerCase()
+    // Remove common business suffixes
+    .replace(/\b(inc|llc|ltd|corp|corporation)\b\.?/gi, '')
+    // German specific: Convert umlauts before normalization
+    .replace(/ä/g, 'ae')
+    .replace(/ö/g, 'oe')
+    .replace(/ü/g, 'ue')
+    .replace(/ß/g, 'ss')
+    // Normalize remaining unicode characters
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    // Remove periods and other special characters
+    .replace(/['".,!?]/g, '')
+    // Replace any non-alphanumeric character with a hyphen
+    .replace(/[^a-z0-9]+/g, '-')
+    .trim()
+    .replace(/^-+|-+$/g, '')
+    .replace(/-+/g, '-');
+}
+
+/**
+ * Normalizes a street address for use in URLs.
+ * Handles common abbreviations, removes numbers, and normalizes formatting.
+ */
+function normalizeStreetAddress(street: string): string {
+  const commonAbbreviations: { [key: string]: string } = {
+    'street': 'st',
+    'road': 'rd',
+    'avenue': 'ave',
+    'boulevard': 'blvd',
+    'drive': 'dr',
+    'lane': 'ln',
+    'circle': 'cir',
+    'court': 'ct',
+    'parkway': 'pkwy',
+    'highway': 'hwy',
+    'place': 'pl',
+    'terrace': 'ter',
+    'square': 'sq',
+  };
+
+  return street
+    .toLowerCase()
+    // Remove building numbers and unit information
+    .replace(/^[0-9-]+\s*/, '')
+    .replace(/\s+#\s*[0-9a-z-]+$/i, '')
+    .replace(/\s+(?:suite|ste|unit|apt|apartment|room|rm|#)\s*[0-9a-z-]+$/i, '')
+    .replace(/\s+(?:floor|fl)\s*[0-9a-z-]+$/i, '')
+    .replace(/\s*,.*$/, '')
+    // Replace full words with abbreviations
+    .replace(
+      new RegExp(`\\b(${Object.keys(commonAbbreviations).join('|')})\\b`, 'gi'),
+      match => commonAbbreviations[match.toLowerCase()]
+    )
+    // Normalize characters and spaces
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/-+/g, '-');
+}
+
+/**
+ * Generates a unique, SEO-friendly slug for a business.
+ * Combines business title, street (optional), and city into a normalized URL slug.
+ * 
+ * Examples:
+ * - "Joe's Pizza, Inc." at "123 Main St" in "St. Louis" → "joes-pizza-main-st-st-louis"
+ * - "Café München" at "45 König Straße" in "München" → "cafe-muenchen-koenig-strasse-muenchen"
+ * 
+ * @param title - Business name
+ * @param city - City name
+ * @param street - Optional street address
+ * @returns A URL-safe slug combining the parts
+ */
 export async function generateUniqueSlug(
   title: string | undefined | null, 
   city: string | undefined | null,
@@ -26,41 +108,19 @@ export async function generateUniqueSlug(
     throw new Error(`Cannot generate slug: title (${title}) or city (${city}) is missing`)
   }
 
-  // Extract the street name from the address, removing any numbers and common words
-  let streetSlug = ''
-  if (street) {
-    streetSlug = street
-      .toLowerCase()
-      // Remove all variations of building numbers, suites, and units
-      .replace(/^[0-9-]+\s*/, '') // Remove leading numbers
-      .replace(/\s+#\s*[0-9a-z-]+$/i, '') // Remove trailing #123
-      .replace(/\s+(?:suite|ste|unit|apt|apartment|room|rm|#)\s*[0-9a-z-]+$/i, '') // Remove suite/unit numbers
-      .replace(/\s+(?:floor|fl)\s*[0-9a-z-]+$/i, '') // Remove floor numbers
-      .replace(/\s*,.*$/, '') // Remove everything after a comma
-      // Replace full words with abbreviations
-      .replace(/\b(street)\b/gi, 'st')
-      .replace(/\b(road)\b/gi, 'rd')
-      .replace(/\b(avenue)\b/gi, 'ave')
-      .replace(/\b(boulevard)\b/gi, 'blvd')
-      .replace(/\b(drive)\b/gi, 'dr')
-      .replace(/\b(lane)\b/gi, 'ln')
-      .replace(/\b(circle)\b/gi, 'cir')
-      .replace(/\b(court)\b/gi, 'ct')
-      .replace(/\b(parkway)\b/gi, 'pkwy')
-      .replace(/\b(highway)\b/gi, 'hwy')
-      .trim()
-      .replace(/[^a-z0-9]+/g, '-')
-  }
+  // Normalize each part
+  const titleSlug = normalizeBusinessTitle(title);
+  const citySlug = normalizeUrlCity(city);
+  const streetSlug = street ? normalizeStreetAddress(street) : '';
 
   // Combine parts to create the base slug
-  const slugParts = [
-    title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-    streetSlug,
-    city.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-  ].filter(Boolean) // Remove empty parts
+  const slugParts = [titleSlug, streetSlug, citySlug].filter(Boolean);
 
-  // Create and return the final slug
-  return slugParts.join('-').replace(/^-+|-+$/g, '').replace(/-+/g, '-')
+  // Create and return the final slug (limited to 100 chars for URL best practices)
+  return slugParts.join('-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/-+/g, '-')
+    .slice(0, 100);
 }
 
 export function formatLocationName(name: string): string {
@@ -201,8 +261,11 @@ export function isValidCity(city: string, state: string): boolean {
       const csvContent = fs.readFileSync('src/data/locations.csv', 'utf-8');
       const records = parse(csvContent, { columns: true });
       
+      // Normalize the input city name
+      const normalizedInputCity = normalizeUrlCity(city);
+      
       return records.some((record: any) => 
-        record.city.toLowerCase() === city.toLowerCase() && 
+        normalizeUrlCity(record.city) === normalizedInputCity && 
         record.state_abbr === state
       );
     }
@@ -220,12 +283,76 @@ export function formatCategoryName(category: string): string {
     .join(' ');
 }
 
+/**
+ * Normalizes a city name for use in URLs following web best practices.
+ * 
+ * Rules applied:
+ * - Convert to lowercase (SEO best practice)
+ * - Remove periods from abbreviations
+ * - Remove apostrophes and quotes
+ * - Convert spaces and special characters to hyphens
+ * - Remove diacritical marks (é → e, ü → u, etc.)
+ * - Handle common abbreviations
+ * - Maximum length of 100 characters (URL length best practice)
+ * - German specific: Convert umlauts (ä → ae, ö → oe, ü → ue)
+ * - German specific: Convert ß → ss
+ * 
+ * Examples:
+ * US Cities:
+ * - "St. Louis Park" → "st-louis-park"
+ * - "Winston-Salem" → "winston-salem"
+ * - "Port St. Lucie" → "port-st-lucie"
+ * - "D'Iberville" → "d-iberville"
+ * - "São Paulo" → "sao-paulo"
+ * - "Martha's Vineyard" → "marthas-vineyard"
+ * 
+ * German Cities:
+ * - "München" → "muenchen"
+ * - "Köln" → "koeln"
+ * - "Bad Füssing" → "bad-fuessing"
+ * - "Garmisch-Partenkirchen" → "garmisch-partenkirchen"
+ * - "Sankt Goar" → "sankt-goar"
+ * - "Rothenburg ob der Tauber" → "rothenburg-ob-der-tauber"
+ * - "Frankfurt am Main" → "frankfurt-am-main"
+ * - "Wangen im Allgäu" → "wangen-im-allgaeu"
+ * - "Bad Münster am Stein" → "bad-muenster-am-stein"
+ * - "Halle (Saale)" → "halle"
+ * - "Bernau bei Berlin" → "bernau-bei-berlin"
+ * 
+ * @param city - The city name to normalize
+ * @returns A URL-safe string with consistent formatting
+ */
 export function normalizeUrlCity(city: string): string {
+  if (!city) return '';
+  
   return city
     .toLowerCase()
-    .replace(/\./g, '') // Remove periods
-    .replace(/[^a-z0-9]+/g, '-') // Replace other special chars with hyphens
-    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
-    .replace(/-+/g, '-'); // Replace multiple hyphens with single
+    // German specific: Convert umlauts before normalization
+    .replace(/ä/g, 'ae')
+    .replace(/ö/g, 'oe')
+    .replace(/ü/g, 'ue')
+    .replace(/ß/g, 'ss')
+    // Normalize remaining unicode characters
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    // Remove periods
+    .replace(/\./g, '')
+    // Remove apostrophes and quotes
+    .replace(/[''"]/g, '')
+    // Remove parentheses and their contents
+    .replace(/\([^)]*\)/g, '')
+    // Remove commas and anything after them (state abbreviations, etc.)
+    .replace(/,.*$/, '')
+    // Replace forward slashes with hyphens
+    .replace(/\//g, '-')
+    // Replace any non-alphanumeric character with a hyphen
+    .replace(/[^a-z0-9]+/g, '-')
+    // Remove leading/trailing hyphens
+    .replace(/^-+|-+$/g, '')
+    // Replace multiple consecutive hyphens with a single hyphen
+    .replace(/-+/g, '-')
+    .trim()
+    // Limit length (100 chars is a reasonable URL segment length)
+    .slice(0, 100);
 }
 

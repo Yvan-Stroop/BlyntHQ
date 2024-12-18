@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { IconArrowRight } from "@tabler/icons-react"
+import { normalizeUrlCity } from "@/lib/utils"
 
 interface RelatedCategoriesProps {
   currentCategory: Category;
@@ -27,7 +28,7 @@ export function RelatedCategories({
   // Generate the correct href based on available location context
   const getCategoryHref = (categorySlug: string) => {
     if (state && city) {
-      return `/categories/${categorySlug}/${state.toLowerCase()}/${city.toLowerCase()}`;
+      return `/categories/${categorySlug}/${state.toLowerCase()}/${normalizeUrlCity(city)}`;
     }
     if (state) {
       return `/categories/${categorySlug}/${state.toLowerCase()}`;

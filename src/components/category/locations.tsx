@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { cn, normalizeUrlCity } from "@/lib/utils"
 
 interface CategoryLocationsProps {
   category: {
@@ -93,7 +93,7 @@ export function CategoryLocations({ category, locations }: CategoryLocationsProp
                   {data.cities.slice(0, 3).map((city) => (
                     <Link
                       key={`${city}-${data.state_abbr}`}
-                      href={`/${category.slug}/${data.state_abbr.toLowerCase()}/${city.toLowerCase().replace(/\s+/g, '-')}`}
+                      href={`/${category.slug}/${data.state_abbr.toLowerCase()}/${normalizeUrlCity(city)}`}
                       className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
                     >
                       <IconBuilding className="w-4 h-4 mr-2" stroke={1.5} />
@@ -160,7 +160,7 @@ export function CategoryLocations({ category, locations }: CategoryLocationsProp
                     {data.cities.slice(0, 4).map((city) => (
                       <Link
                         key={`${city}-${data.state_abbr}`}
-                        href={`/${category.slug}/${data.state_abbr.toLowerCase()}/${city.toLowerCase().replace(/\s+/g, '-')}`}
+                        href={`/${category.slug}/${data.state_abbr.toLowerCase()}/${normalizeUrlCity(city)}`}
                         className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         <IconBuilding className="w-4 h-4 mr-2" stroke={1.5} />

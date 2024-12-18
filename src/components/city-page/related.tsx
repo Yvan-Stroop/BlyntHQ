@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { cn, normalizeUrlCity } from "@/lib/utils"
 
 interface RelatedCategoriesProps {
   currentCategory: {
@@ -35,7 +35,7 @@ export function RelatedCategories({
   relatedCategories
 }: RelatedCategoriesProps) {
   // Format URL-friendly strings
-  const citySlug = city.toLowerCase().replace(/\s+/g, '-')
+  const citySlug = normalizeUrlCity(city)
   const stateSlug = state.toLowerCase()
 
   return (

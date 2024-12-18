@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { loadLocationsFromCSV, loadCategoriesFromCSV, Location } from '@/lib/csv'
 import { getStateNameFromAbbreviation } from '@/lib/locations'
-import { supabase } from '@/lib/supabase'
-import { formatLocationName } from '@/lib/utils'
+import { getLocationBusinesses } from '@/lib/services/business'
+import { formatLocationName, normalizeUrlCity } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Breadcrumbs } from '@/components/breadcrumbs'
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description
     },
     alternates: {
-      canonical: `https://getblynt.com/locations/${state.toLowerCase()}/${city.toLowerCase()}`
+      canonical: `https://getblynt.com/locations/${state.toLowerCase()}/${normalizeUrlCity(city)}`
     }
   }
 }
@@ -71,87 +71,41 @@ export default async function CityLocationPage({ params }: PageProps) {
   const stateName = getStateNameFromAbbreviation(state.toUpperCase())
   if (!stateName) return notFound()
 
-  const cityName = formatLocationName(city)
-  
-  // Get all businesses for this city from the database
-  const { data: cityBusinesses } = await supabase
-    .from('businesses')
-    .select('*')
-    .eq('state', stateName)
-    .ilike('city', cityName.toLowerCase())
+  // Check if URL needs normalization
+  const normalizedCity = normalizeUrlCity(city)
+  if (city !== normalizedCity) {
+    redirect(`/locations/${state.toLowerCase()}/${normalizedCity}`)
+  }
 
-  if (!cityBusinesses?.length) {
+  const cityName = formatLocationName(normalizedCity)
+  
+  // Get city location data
+  const cityLocation = locations.find(
+    loc => loc.state === stateName && 
+    normalizeUrlCity(loc.city) === normalizeUrlCity(cityName)
+  )
+  if (!cityLocation) {
     return notFound()
   }
 
-  // Group businesses by category
-  const categoryMap = new Map<string, {
-    category: string;
-    slug: string;
-    count: number;
-    businesses: Array<{
-      title: string;
-      rating?: number;
-      reviews?: number;
-    }>;
-  }>();
+  // Get all businesses for this location
+  const { categories: activeCategories, exactCount: exactCityMatches, relatedCount, nearbyCount, totalCount } = 
+    await getLocationBusinesses({
+      state: state,
+      city: normalizedCity
+    })
 
-  // Initialize categories from our CSV
-  categories.forEach(cat => {
-    categoryMap.set(cat.slug, {
-      category: cat.name,
-      slug: cat.slug,
-      count: 0,
-      businesses: []
-    });
-  });
+  console.log(`Found ${activeCategories.length} categories with businesses`)
+  console.log('Results distribution:', {
+    categories: activeCategories.length,
+    totalBusinesses: totalCount,
+    exactCityMatch: exactCityMatches,
+    relatedCount,
+    nearby: nearbyCount
+  })
 
-  // Process each business
-  cityBusinesses.forEach(business => {
-    const processCategory = (categoryName: string) => {
-      const matchingCategory = categories.find(
-        cat => cat.name.toLowerCase() === categoryName.toLowerCase()
-      );
-
-      if (matchingCategory && categoryMap.has(matchingCategory.slug)) {
-        const categoryData = categoryMap.get(matchingCategory.slug)!;
-        // Only increment count and add business if it's not already in the list
-        const businessExists = categoryData.businesses.some(b => b.title === business.title);
-        if (!businessExists) {
-          categoryData.count++;
-          categoryData.businesses.push({
-            title: business.title,
-            rating: business.rating_value,
-            reviews: business.rating_count
-          });
-        }
-      }
-    };
-
-    // Process main category
-    if (business.category) {
-      processCategory(business.category);
-    }
-
-    // Process additional categories
-    const additionalCategories = business.additional_categories as string[] || [];
-    additionalCategories.forEach(additionalCat => {
-      processCategory(additionalCat);
-    });
-  });
-
-  // Convert map to array and filter out categories with no businesses
-  const activeCategories = Array.from(categoryMap.values())
-    .filter(cat => cat.count > 0)
-    .map(cat => ({
-      ...cat,
-      topBusinesses: cat.businesses
-        .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-        .slice(0, 3)
-    }))
-    .sort((a, b) => b.count - a.count);
-
-  if (!activeCategories.length) {
+  // If no businesses found at all, show 404
+  if (totalCount === 0) {
     return notFound()
   }
 
@@ -192,13 +146,29 @@ export default async function CityLocationPage({ params }: PageProps) {
             </h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Browse and discover local businesses across {activeCategories.length} categories in {cityName}, {stateName}.
+            Browse and discover local businesses across {activeCategories.length} categories 
+            {exactCityMatches > 0 ? (
+              ` in ${cityName}, ${stateName}.`
+            ) : (
+              ` near ${cityName}, ${stateName}.`
+            )}
           </p>
         </div>
       </div>
 
       <div className="container py-8">
         <div className="space-y-8">
+          {nearbyCount > 0 && (
+            <div className="rounded-lg border bg-card text-card-foreground p-4">
+              <p className="text-sm text-muted-foreground">
+                {exactCityMatches > 0 ? (
+                  `Showing businesses in ${cityName} and nearby areas.`
+                ) : (
+                  `Showing businesses within 20km of ${cityName}.`
+                )}
+              </p>
+            </div>
+          )}
           {/* Popular Categories */}
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold tracking-tight">
@@ -217,7 +187,7 @@ export default async function CityLocationPage({ params }: PageProps) {
                           <div>
                             <h3 className="font-medium">{category.category}</h3>
                             <p className="text-sm text-muted-foreground">
-                              {category.count} businesses
+                              {category.count} {category.count === 1 ? 'business' : 'businesses'}
                             </p>
                           </div>
                         </div>
@@ -225,7 +195,7 @@ export default async function CityLocationPage({ params }: PageProps) {
 
                       {/* Top Businesses */}
                       <div className="space-y-2">
-                        {category.topBusinesses.map((business, index) => (
+                        {category.businesses.map((business, index) => (
                           <div key={`${category.slug}-${business.title}-${index}`} className="flex items-center gap-2">
                             <IconBuilding className="w-4 h-4 text-muted-foreground" />
                             <span className="text-sm text-muted-foreground">
@@ -236,13 +206,16 @@ export default async function CityLocationPage({ params }: PageProps) {
                                   <span className="ml-1">{business.rating.toFixed(1)}</span>
                                 </span>
                               )}
+                              {business.resultType !== 'exact' && (
+                                <span className="ml-2 text-xs text-muted-foreground">(nearby)</span>
+                              )}
                             </span>
                           </div>
                         ))}
                       </div>
 
                       <Button variant="outline" size="sm" className="w-full gap-2" asChild>
-                        <Link href={`/categories/${category.slug}/${state.toLowerCase()}/${city}`}>
+                        <Link href={`/categories/${category.slug}/${state.toLowerCase()}/${normalizeUrlCity(city)}`}>
                           View All
                           <IconArrowRight className="w-4 h-4" />
                         </Link>

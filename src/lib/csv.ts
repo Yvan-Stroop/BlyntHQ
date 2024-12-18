@@ -1,6 +1,7 @@
 import path from 'path'
 import { promises as fs } from 'fs'
 import { parse } from 'csv-parse/sync'
+import { normalizeUrlCity } from './utils'
 
 export interface Category {
   name: string
@@ -30,14 +31,22 @@ export interface StateCity {
   };
 }
 
+// Cache the CSV data in memory
+let categoriesCache: Category[] | null = null
+let locationsCache: Location[] | null = null
+
 export async function loadCategoriesFromCSV() {
+  // Return cached data if available
+  if (categoriesCache) return categoriesCache
+
   try {
     const filePath = path.join(process.cwd(), 'src', 'data', 'categories.csv')
     const fileContent = await fs.readFile(filePath, 'utf-8')
-    return parse(fileContent, {
+    categoriesCache = parse(fileContent, {
       columns: true,
       skip_empty_lines: true
     }) as Category[]
+    return categoriesCache
   } catch (error) {
     console.error('Error loading categories:', error)
     return []
@@ -45,13 +54,17 @@ export async function loadCategoriesFromCSV() {
 }
 
 export async function loadLocationsFromCSV() {
+  // Return cached data if available
+  if (locationsCache) return locationsCache
+
   try {
     const filePath = path.join(process.cwd(), 'src', 'data', 'locations.csv')
     const fileContent = await fs.readFile(filePath, 'utf-8')
-    return parse(fileContent, {
+    locationsCache = parse(fileContent, {
       columns: true,
       skip_empty_lines: true
     }) as Location[]
+    return locationsCache
   } catch (error) {
     console.error('Error loading locations:', error)
     return []
@@ -63,7 +76,7 @@ export function transformLocationsToStateCity(locations: Location[]): StateCity 
   
   locations.forEach(location => {
     const stateAbbr = location.state_abbr
-    const citySlug = location.city.toLowerCase().replace(/\s+/g, '-')
+    const citySlug = normalizeUrlCity(location.city)
     
     // Initialize state if it doesn't exist
     if (!states[stateAbbr]) {

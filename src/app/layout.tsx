@@ -8,6 +8,9 @@ import { Toaster } from "@/components/ui/toaster"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { loadCategoriesFromCSV, loadLocationsFromCSV, transformLocationsToStateCity } from "@/lib/csv"
 import { cn } from "@/lib/utils"
+import { GoogleAnalyticsRouteTracker } from '@/components/analytics/route-tracker'
+import Script from 'next/script'
+import { Suspense } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +18,7 @@ export const metadata = {
   manifest: '/favicon/site.webmanifest',
   icons: {
     icon: [
+      { url: '/favicon/favicon.ico', sizes: 'any' },
       { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
@@ -47,11 +51,26 @@ export default async function RootLayout({
     <html lang="en" className="light" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(generateGlobalSchema())
+          }}
+        />
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+            `,
           }}
         />
       </head>
@@ -70,6 +89,9 @@ export default async function RootLayout({
             <Footer categories={categories} locations={locationData.locations} />
           </div>
           <Toaster />
+          <Suspense>
+            <GoogleAnalyticsRouteTracker />
+          </Suspense>
         </ThemeProvider>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!} />
       </body>

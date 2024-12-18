@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { loadLocationsFromCSV, Location } from '@/lib/csv'
 import { getStateNameFromAbbreviation } from '@/lib/locations'
-import { formatLocationName } from '@/lib/utils'
+import { formatLocationName, normalizeUrlCity } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Breadcrumbs } from '@/components/breadcrumbs'
@@ -148,7 +148,7 @@ export default async function StateLocationPage({ params }: PageProps) {
 
                         <div className="flex flex-wrap gap-2">
                           <Button variant="outline" size="sm" className="gap-2" asChild>
-                            <Link href={`/locations/${state.toLowerCase()}/${location.city.toLowerCase().replace(/\s+/g, '-')}`}>
+                            <Link href={`/locations/${state.toLowerCase()}/${normalizeUrlCity(location.city)}`}>
                               <IconCategory className="w-4 h-4" />
                               Browse Businesses
                             </Link>

@@ -117,7 +117,7 @@ export default async function CategoryCityPage({ params, searchParams }: PagePro
       getBusinesses({
         category,
         state,
-        city,
+        city: normalizedCity,
         page: currentPage
       }),
       loadCategoriesFromCSV()

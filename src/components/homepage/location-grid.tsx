@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { cn, normalizeUrlCity } from "@/lib/utils"
 
 interface LocationGridProps {
   states: {
@@ -80,7 +80,7 @@ export function LocationGrid({ states }: LocationGridProps) {
                           <IconBuilding className="w-4 h-4 text-muted-foreground" />
                           <Button variant="link" className="p-0 h-auto" asChild>
                             <Link
-                              href={`/locations/${state.abbr.toLowerCase()}/${city.slug.toLowerCase().replace(/\s+/g, '-')}`}
+                              href={`/locations/${state.abbr.toLowerCase()}/${normalizeUrlCity(city.name)}`}
                               className="text-sm text-muted-foreground hover:text-primary"
                             >
                               {city.name}

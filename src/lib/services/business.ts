@@ -5,6 +5,7 @@ import { generateUniqueSlug, normalizeUrlCity, isValidCity } from '@/lib/utils'
 import { readFileSync } from 'fs'
 import { parse } from 'csv-parse/sync'
 import { headers } from 'next/headers'
+import { loadCategoriesFromCSV } from '@/lib/csv'
 
 const CONFIG = {
   RESULTS_PER_PAGE: 10,
@@ -134,7 +135,7 @@ async function transformToExtendedBusiness(
 }
 
 // Calculate distance between two points using Haversine formula
-function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+export function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = 6371; // Earth's radius in kilometers
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
@@ -144,6 +145,63 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
     Math.sin(dLon/2) * Math.sin(dLon/2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   return R * c;
+}
+
+// Calculate business score based on various factors
+export function calculateBusinessScore(
+  business: Business,
+  targetLat: number,
+  targetLng: number,
+  isExactCityMatch: boolean,
+  cityZipCodes: string[]
+): number {
+  let score = 50; // Base score
+
+  // Location-based scoring
+  if (cityZipCodes.includes(business.zip ?? '')) {
+    score += 40; // ZIP code match bonus
+  }
+  
+  if (isExactCityMatch) {
+    score += 30; // Exact city match bonus
+  }
+
+  // Distance-based penalties
+  const distance = calculateDistance(
+    targetLat,
+    targetLng,
+    business.latitude ?? 0,
+    business.longitude ?? 0
+  );
+  
+  if (distance <= 5) {
+    // 0-5km: -1.5 points per km
+    score -= distance * 1.5;
+  } else if (distance <= 20) {
+    // 5-20km: First -7.5 points from first tier, then -2 points per km
+    score -= 7.5 + ((distance - 5) * 2);
+  } else {
+    // >20km: Previous penalties plus additional
+    score -= 37.5 + ((distance - 20) * 2.5);
+  }
+
+  // Quality signals scoring
+  if (business.rating?.value) {
+    // Rating value: up to 10 points (2 points per star)
+    score += Math.min(business.rating.value * 2, 10);
+  }
+
+  if (business.rating?.votes_count) {
+    // Review count: up to 5 points (logarithmic scale)
+    score += Math.min(Math.log2(business.rating.votes_count), 5);
+  }
+
+  // Additional quality signals
+  if (business.is_claimed) score += 3;
+  if (business.url) score += 2;
+  if (business.work_time) score += 2;
+
+  return score;
 }
 
 // Get coordinates for a city from CSV data
@@ -168,62 +226,6 @@ function getCityCoordinates(city: string, state: string): { lat: number; lng: nu
     console.error('Error loading city coordinates:', error);
     return null;
   }
-}
-
-// Calculate business score based on various factors
-function calculateBusinessScore(business: any, cityLat?: number, cityLng?: number, isExactCityMatch: boolean = false): number {
-  // Base score multiplier for exact city matches
-  const cityMultiplier = isExactCityMatch ? 1000 : 1;  // Ensures exact city matches are always on top
-
-  // Rating Score (0-25 points)
-  const ratingScore = (business.rating_value || 0) * 5;  // 5 stars * 5 = 25 points max
-
-  // Review Count Score (0-15 points)
-  // Logarithmic scale to handle large differences in review counts
-  const reviewScore = Math.min(
-    business.rating_count ? (Math.log(business.rating_count) * 2) : 0,
-    15
-  );
-
-  // Location Score (0-10 points)
-  let locationScore = isExactCityMatch ? 10 : 0; // Full points for exact city match
-  if (cityLat && cityLng && business.latitude && business.longitude) {
-    const distance = calculateDistance(
-      cityLat,
-      cityLng,
-      business.latitude,
-      business.longitude
-    );
-    // Reduce points based on distance for non-local businesses
-    // More gradual distance decay: up to 30km with diminishing returns
-    locationScore = isExactCityMatch ? 10 : Math.max(0, 10 - (distance * 0.33));
-  }
-
-  // Quality Indicators (0-15 points)
-  const qualityScore = (
-    (business.is_claimed ? 4 : 0) +         // Verified business (higher weight)
-    (business.url ? 3 : 0) +                // Has website
-    (business.address_street ? 3 : 0) +     // Has address
-    (business.work_time ? 3 : 0) +          // Has hours
-    (business.main_image ? 2 : 0)           // Has image
-  );
-
-  // Category Match Score (0-10 points)
-  const categoryMatchScore = business.category?.toLowerCase().includes(business.searchedCategory?.toLowerCase()) ? 10 : 
-    (business.additional_categories?.some((cat: string) => 
-      cat.toLowerCase().includes(business.searchedCategory?.toLowerCase())
-    ) ? 5 : 0);
-
-  // Total possible base score: 75 points
-  // - Rating: 25 points (33.3%)
-  // - Reviews: 15 points (20%)
-  // - Location: 10 points (13.3%)
-  // - Quality: 15 points (20%)
-  // - Category Match: 10 points (13.3%)
-  
-  // Final score calculation with city multiplier
-  const baseScore = ratingScore + reviewScore + locationScore + qualityScore + categoryMatchScore;
-  return baseScore * cityMultiplier;
 }
 
 interface SortOptions {
@@ -361,28 +363,23 @@ function transformBusinessData(business: any): Business {
   } as Business
 }
 
-const debugLog = (message: string, data: any) => {
-  if (process.env.NODE_ENV === 'development') {
-    const timestamp = new Date().toISOString();
-    console.log(`\n[Debug ${timestamp}] ${message}`, data);
-  }
-};
-
 // Check if we've already fetched this category-location combination
 async function hasBeenFetched(category: string, city: string, state: string): Promise<boolean> {
+  const normalizedInputCity = normalizeUrlCity(city);
+  
+  // Get all records for this category and state
   const { data, error } = await supabase
     .from('category_location_fetches')
-    .select('id')
+    .select('*')
     .eq('category', category)
-    .eq('city', city)
-    .eq('state', state)
-    .single();
+    .eq('state', state);
 
   if (error) {
     return false; // If there's an error, assume we haven't fetched it
   }
 
-  return !!data;
+  // Compare normalized versions of city names
+  return data?.some(record => normalizeUrlCity(record.city) === normalizedInputCity) || false;
 }
 
 export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusinessResponse> {
@@ -397,7 +394,7 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
       // Add more mappings as needed
     };
     const formattedCategory = categoryMap[category] || category.replace(/-/g, ' ');
-    const formattedCity = city.replace(/-/g, ' ');
+    const formattedCity = normalizeUrlCity(city);
     const formattedState = STATE_MAP[state.toUpperCase()] || state;
 
     // Validate city exists using existing isValidCity function
@@ -405,16 +402,15 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
       throw new Error(`Invalid city: ${formattedCity}, ${state}`);
     }
 
-    // Get city coordinates for scoring
-    const cityCoords = getCityCoordinates(formattedCity, state.toUpperCase());
+    // Get city coordinates and ZIP codes for scoring
+    const cityLocation = getCityLocation(formattedCity, state.toUpperCase());
+    if (!cityLocation) {
+      throw new Error(`City location data not found: ${formattedCity}, ${state}`);
+    }
 
-    debugLog('Query parameters:', {
-      originalCategory: category,
-      formattedCategory,
-      city: formattedCity,
-      state: formattedState,
-      coords: cityCoords
-    });
+    const cityLat = parseFloat(cityLocation.lat.toString());
+    const cityLng = parseFloat(cityLocation.lng.toString());
+    const cityZipCodes = cityLocation.zips.split(' ');
 
     // Check if we've already fetched this combination
     const alreadyFetched = await hasBeenFetched(
@@ -425,12 +421,6 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
 
     // If not fetched, fetch from API first
     if (!alreadyFetched) {
-      debugLog('Location not yet fetched, fetching from API', {
-        category: formattedCategory,
-        city: formattedCity,
-        state: formattedState
-      });
-
       try {
         const apiResponse = await fetchLocalbusiness(
           formattedCategory,
@@ -445,10 +435,6 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
           apiBusinesses.map(async (business) => {
             // Skip businesses with missing city data
             if (!business.address_info?.city) {
-              debugLog('Skipping business due to missing city:', {
-                title: business.title,
-                address_info: business.address_info
-              });
               return;
             }
 
@@ -498,7 +484,7 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
               });
 
             if (insertError) {
-              debugLog('Error storing business:', insertError);
+              console.error('Error storing business:', insertError);
             }
           })
         );
@@ -508,7 +494,7 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
           .from('category_location_fetches')
           .upsert({
             category: formattedCategory,
-            city: formattedCity,
+            city: city, // Store the original city name
             state: formattedState,
             fetched_at: new Date().toISOString()
           }, {
@@ -516,18 +502,12 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
           });
 
         if (fetchTrackError) {
-          debugLog('Error tracking category location fetch:', fetchTrackError);
+          console.error('Error tracking category location fetch:', fetchTrackError);
         }
 
       } catch (apiError) {
-        debugLog('API fetch error:', apiError);
+        console.error('API fetch error:', apiError);
       }
-    } else {
-      debugLog('Location was already fetched, skipping API call', {
-        category: formattedCategory,
-        city: formattedCity,
-        state: formattedState
-      });
     }
 
     // Format category with only first letter of first word capitalized for additional_categories matching
@@ -545,36 +525,31 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
       .not('longitude', 'is', null);
 
     if (error) {
-      debugLog('Database error:', error);
+      console.error('Database error:', error);
       throw error;
     }
-
-    debugLog('Database query params:', {
-      state: formattedState,
-      category: formattedCategory,
-      categoryForArray: formattedCategoryForArray,
-      query: `category.ilike."${formattedCategory}",additional_categories.cs.{"${formattedCategoryForArray}"}`,
-      resultsFound: businesses?.length || 0
-    });
 
     let matchedBusinesses = businesses || [];
 
     // Calculate scores and add metadata for all businesses
     const businessesWithScores = await Promise.all(matchedBusinesses.map(async business => {
       const isExactCityMatch = business.city.toLowerCase() === formattedCity.toLowerCase();
-      const score = calculateBusinessScore(
-        business, 
-        cityCoords?.lat, 
-        cityCoords?.lng,
-        isExactCityMatch
+      const isInCityZipCode = cityZipCodes.includes(business.zip);
+      
+      const distance = calculateDistance(
+        cityLat,
+        cityLng,
+        parseFloat(business.latitude!),
+        parseFloat(business.longitude!)
       );
-      const distance = cityCoords && business.latitude && business.longitude ? 
-        calculateDistance(
-          cityCoords.lat,
-          cityCoords.lng,
-          business.latitude,
-          business.longitude
-        ) : Infinity;
+
+      const score = calculateBusinessScore(
+        business,
+        cityLat,
+        cityLng,
+        isExactCityMatch,
+        cityZipCodes
+      );
 
       const transformedBusiness = await transformToExtendedBusiness(
         business,
@@ -585,35 +560,28 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
         ...transformedBusiness,
         searchedCategory: formattedCategory,
         isExactCityMatch,
+        isInCityZipCode,
         score,
         distance
       };
     }));
 
-    // Sort results
-    const sortedBusinesses = businessesWithScores.sort((a, b) => {
-      const scoreDiff = b.score - a.score;
-      if (scoreDiff !== 0) return scoreDiff;
-      return a.distance - b.distance;
-    });
+    // Filter businesses within 20km and sort by score and distance
+    const filteredAndSortedBusinesses = businessesWithScores
+      .filter(business => business.distance <= 20)
+      .sort((a, b) => {
+        const scoreDiff = b.score - a.score;
+        if (scoreDiff !== 0) return scoreDiff;
+        return a.distance - b.distance;
+      });
 
-    const exactCount = sortedBusinesses.filter(b => b.isExactCityMatch).length;
-    const nearbyCount = sortedBusinesses.filter(b => !b.isExactCityMatch).length;
+    // Calculate result statistics
+    const exactCount = filteredAndSortedBusinesses.filter(b => b.isExactCityMatch).length;
+    const zipCodeCount = filteredAndSortedBusinesses.filter(b => b.isInCityZipCode).length;
+    const nearbyCount = filteredAndSortedBusinesses.filter(b => !b.isExactCityMatch && !b.isInCityZipCode).length;
 
-    debugLog('Processed results:', {
-      totalTime: `${Math.round(performance.now() - startTime)}ms`,
-      totalBusinesses: sortedBusinesses.length,
-      exactMatches: exactCount,
-      nearbyMatches: nearbyCount,
-      topResults: sortedBusinesses.slice(0, 5).map(b => ({
-        city: b.city,
-        score: Math.round(b.score * 100) / 100,
-        distance: Math.round(b.distance * 10) / 10,
-        isExact: b.isExactCityMatch
-      }))
-    });
-
-    const paginatedBusinesses = sortedBusinesses
+    // Paginate results
+    const paginatedBusinesses = filteredAndSortedBusinesses
       .slice(skip, skip + CONFIG.RESULTS_PER_PAGE)
       .map(business => ({
         ...business,
@@ -622,18 +590,43 @@ export async function getBusinesses(query: BusinessQuery): Promise<ExtendedBusin
 
     return {
       businesses: paginatedBusinesses,
-      totalCount: sortedBusinesses.length,
+      totalCount: filteredAndSortedBusinesses.length,
       exactCount,
-      relatedCount: 0,
+      relatedCount: zipCodeCount - exactCount, // Businesses in ZIP code but not exact city match
       nearbyCount,
       currentPage: page,
-      totalPages: Math.ceil(sortedBusinesses.length / CONFIG.RESULTS_PER_PAGE),
-      hasNextPage: skip + CONFIG.RESULTS_PER_PAGE < sortedBusinesses.length,
+      totalPages: Math.ceil(filteredAndSortedBusinesses.length / CONFIG.RESULTS_PER_PAGE),
+      hasNextPage: skip + CONFIG.RESULTS_PER_PAGE < filteredAndSortedBusinesses.length,
       hasPreviousPage: page > 1
     };
   } catch (error) {
-    debugLog('Error in getBusinesses:', error);
+    console.error('Error in getBusinesses:', error);
     throw error;
+  }
+}
+
+// Helper function to get city location data including coordinates and ZIP codes
+function getCityLocation(city: string, stateAbbr: string): { lat: number; lng: number; zips: string } | null {
+  try {
+    const csvContent = readFileSync('src/data/locations.csv', 'utf-8');
+    const records = parse(csvContent, { columns: true });
+    
+    const location = records.find((record: any) => 
+      normalizeUrlCity(record.city) === normalizeUrlCity(city) && 
+      record.state_abbr === stateAbbr
+    );
+
+    if (location) {
+      return {
+        lat: parseFloat(location.lat),
+        lng: parseFloat(location.lng),
+        zips: location.zips
+      };
+    }
+    return null;
+  } catch (error) {
+    console.error('Error loading city location data:', error);
+    return null;
   }
 }
 
@@ -719,5 +712,194 @@ export async function getRelatedBusinesses({
   } catch (error) {
     console.error('Error fetching related businesses:', error);
     return [];
+  }
+}
+
+// Function to get all businesses for a location page
+export async function getLocationBusinesses({
+  state,
+  city
+}: {
+  state: string;
+  city: string;
+}): Promise<{
+  businesses: Business[];
+  categories: Array<{
+    category: string;
+    slug: string;
+    count: number;
+    businesses: Array<{
+      title: string;
+      rating?: number;
+      reviews?: number;
+      resultType: 'exact' | 'related' | 'nearby';
+    }>;
+  }>;
+  totalCount: number;
+  exactCount: number;
+  relatedCount: number;
+  nearbyCount: number;
+}> {
+  try {
+    // Format location properly
+    const formattedCity = normalizeUrlCity(city)
+    const formattedState = STATE_MAP[state.toUpperCase()] || state
+
+    // Get city coordinates and ZIP codes for scoring
+    const cityLocation = getCityLocation(formattedCity, state.toUpperCase())
+    if (!cityLocation) {
+      throw new Error(`City location data not found: ${formattedCity}, ${state}`)
+    }
+
+    const cityLat = parseFloat(cityLocation.lat.toString())
+    const cityLng = parseFloat(cityLocation.lng.toString())
+    const cityZipCodes = cityLocation.zips.split(' ')
+
+    // Load categories first - this is our source of truth
+    const categories = await loadCategoriesFromCSV()
+    
+    // Process each category in parallel
+    const categoryResults = await Promise.all(
+      categories.map(async (category) => {
+        // Format category properly - match the format used in getBusinesses
+        const formattedCategory = category.name.toLowerCase()
+        const formattedCategoryForArray = category.name
+          .toLowerCase()
+          .replace(/^[a-z]/, letter => letter.toUpperCase())
+
+        // First get the total count for this category
+        const { count: totalCount } = await supabase
+          .from('businesses')
+          .select('*', { count: 'exact', head: true })
+          .eq('state', formattedState)
+          .or(`category.ilike."${formattedCategory}",additional_categories.cs.{"${formattedCategoryForArray}"}`)
+          .not('latitude', 'is', null)
+          .not('longitude', 'is', null)
+
+        // If no businesses, skip further queries
+        if (!totalCount) return null
+
+        // Get all businesses for this category using pagination
+        const allBusinesses: any[] = []
+        let page = 0
+        const pageSize = 1000
+
+        while (page * pageSize < totalCount) {
+          const { data: pageBusinesses, error } = await supabase
+            .from('businesses')
+            .select('*')
+            .eq('state', formattedState)
+            .or(`category.ilike."${formattedCategory}",additional_categories.cs.{"${formattedCategoryForArray}"}`)
+            .not('latitude', 'is', null)
+            .not('longitude', 'is', null)
+            .range(page * pageSize, (page + 1) * pageSize - 1)
+
+          if (error) {
+            console.error(`Error fetching businesses for category ${category.name}:`, error)
+            break
+          }
+
+          if (pageBusinesses) {
+            allBusinesses.push(...pageBusinesses)
+          }
+
+          page++
+        }
+
+        if (!allBusinesses.length) {
+          return null
+        }
+
+        // Apply same scoring and filtering as category page
+        const scoredBusinesses = allBusinesses.map(business => {
+          const isExactCityMatch = business.city.toLowerCase() === formattedCity.toLowerCase()
+          const isInCityZipCode = cityZipCodes.includes(business.zip)
+          
+          const distance = calculateDistance(
+            cityLat,
+            cityLng,
+            parseFloat(business.latitude!),
+            parseFloat(business.longitude!)
+          )
+
+          const score = calculateBusinessScore(
+            business,
+            cityLat,
+            cityLng,
+            isExactCityMatch,
+            cityZipCodes
+          )
+
+          return {
+            ...business,
+            isExactCityMatch,
+            isInCityZipCode,
+            score,
+            distance,
+            resultType: isExactCityMatch ? 'exact' as const : 'nearby' as const
+          }
+        })
+
+        // Filter by distance and sort
+        const filteredBusinesses = scoredBusinesses
+          .filter(business => business.distance <= 20)
+          .sort((a, b) => {
+            const scoreDiff = b.score - a.score
+            if (scoreDiff !== 0) return scoreDiff
+            return a.distance - b.distance
+          })
+
+        if (filteredBusinesses.length === 0) {
+          return null
+        }
+
+        return {
+          category: category.name,
+          slug: category.slug,
+          count: filteredBusinesses.length,
+          businesses: filteredBusinesses
+            .slice(0, 3)
+            .map(business => ({
+              title: business.title,
+              rating: business.rating_value,
+              reviews: business.rating_count,
+              resultType: business.resultType
+            })),
+          allBusinesses: filteredBusinesses // Keep all businesses for statistics
+        }
+      })
+    )
+
+    // Filter out categories with no businesses
+    const activeCategories = categoryResults.filter((result): result is NonNullable<typeof result> => 
+      result !== null
+    )
+
+    // Combine all businesses for statistics
+    const allBusinesses = activeCategories.flatMap(cat => cat.allBusinesses)
+
+    // Calculate statistics
+    const exactCount = allBusinesses.filter(b => b.isExactCityMatch).length
+    const zipCodeCount = allBusinesses.filter(b => b.isInCityZipCode).length
+    const nearbyCount = allBusinesses.filter(b => !b.isExactCityMatch && !b.isInCityZipCode).length
+
+    return {
+      businesses: allBusinesses,
+      categories: activeCategories
+        .map(({ category, slug, count, businesses }) => ({
+          category,
+          slug,
+          count,
+          businesses
+        }))
+        .sort((a, b) => a.category.localeCompare(b.category)), // Sort alphabetically by category name
+      totalCount: allBusinesses.length,
+      exactCount,
+      relatedCount: zipCodeCount - exactCount,
+      nearbyCount
+    }
+  } catch (error) {
+    console.error('Error in getLocationBusinesses:', error)
+    throw error
   }
 }

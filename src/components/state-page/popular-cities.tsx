@@ -12,6 +12,7 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
+import { normalizeUrlCity } from "@/lib/utils"
 
 interface PopularCity {
   name: string;
@@ -76,7 +77,7 @@ export function PopularCities({
         {cities.map((city) => (
           <Link
             key={city.slug}
-            href={`${baseUrl}/${city.slug}`}
+            href={`${baseUrl}/${normalizeUrlCity(city.name)}`}
             className="block"
           >
             <div className="group p-4 rounded-lg hover:bg-accent transition-colors">

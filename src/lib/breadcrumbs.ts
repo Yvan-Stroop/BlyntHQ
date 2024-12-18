@@ -1,5 +1,5 @@
 import { BreadcrumbConfig } from '@/types/breadcrumb'
-import { formatCategoryName } from '@/lib/utils'
+import { formatCategoryName, normalizeUrlCity } from '@/lib/utils'
 import { loadCategoriesFromCSV, loadLocationsFromCSV } from '@/lib/csv'
 
 let categoriesCache: Array<{ slug: string; name: string }> | null = null;
@@ -21,10 +21,10 @@ async function isValidCategory(categorySlug: string): Promise<boolean> {
 
 async function isValidLocation(stateAbbr: string, city: string): Promise<boolean> {
   await ensureCacheLoaded();
+  const normalizedCity = normalizeUrlCity(city);
   return locationsCache!.some(loc => 
     loc.state_abbr.toLowerCase() === stateAbbr.toLowerCase() && 
-    loc.city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '') === 
-    city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '')
+    normalizeUrlCity(loc.city) === normalizedCity
   );
 }
 
@@ -99,7 +99,7 @@ export async function generateBreadcrumbs(type: string, params: {
 
             // Add city breadcrumb if we have it
             if (params.searchOrigin.city) {
-              const citySlug = params.searchOrigin.city.toLowerCase().replace(/\s+/g, '-');
+              const citySlug = normalizeUrlCity(params.searchOrigin.city);
               const isValidLoc = await isValidLocation(params.searchOrigin.state, params.searchOrigin.city);
               if (isValidLoc) {
                 breadcrumbs.push({
@@ -197,7 +197,7 @@ export async function generateBreadcrumbs(type: string, params: {
         breadcrumbs.push({
           type: 'city',
           label: params.city,
-          href: `/locations/${params.state?.toLowerCase()}/${params.city.toLowerCase().replace(/\s+/g, '-')}`,
+          href: `/locations/${params.state?.toLowerCase()}/${normalizeUrlCity(params.city)}`,
           description: `Browse businesses in ${params.city}, ${params.state}`
         });
       }
