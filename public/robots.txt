@@ -2,6 +2,7 @@
 User-agent: *
 
 # Allow crawling of valid paths
+Allow: /
 Allow: /categories/
 Allow: /locations/
 Allow: /biz/
@@ -12,6 +13,11 @@ Allow: /terms/
 Allow: /add-business/
 Allow: /claim-business/
 Allow: /*?page=*
+
+# Allow sitemaps
+Allow: /sitemap_index.xml
+Allow: /sitemaps/
+Allow: /sitemaps/*.xml
 
 # Allow Next.js static assets
 Allow: /_next/static/
