@@ -1,3 +1,4 @@
+// Test automatic deployment - This comment will verify Coolify's auto-deploy feature
 import "@/app/globals.css"
 import { Inter } from 'next/font/google'
 import { generateGlobalSchema } from '@/lib/schemas'
