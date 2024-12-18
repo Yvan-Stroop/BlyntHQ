@@ -1,3 +1,5 @@
+require('dotenv').config({ path: '.env.local' })
+
 const fs = require('fs')
 const path = require('path')
 const { supabase } = require('../lib/supabase')
@@ -5,6 +7,7 @@ const { SITEMAP_CONFIG } = require('../lib/config')
 const { loadCategoriesFromCSV, loadLocationsFromCSV } = require('../lib/csv')
 const { parseStringPromise, Builder } = require('xml2js')
 const { formatCategoryForUrl, formatCityForUrl, normalizeUrlCity } = require('../lib/utils')
+const { getLocationBusinesses } = require('../lib/services/business')
 
 // Define types based on our CSV structure
 interface Category {
@@ -66,79 +69,91 @@ async function readExistingSitemap(filename: string): Promise<SitemapUrl[]> {
 async function generateBusinessSitemaps() {
   console.log('Generating business sitemaps...')
   
-  // Get existing business URLs
+  // Get existing business URLs to maintain lastmod dates
   const existingUrls = new Set<string>()
   const existingSitemap = await readExistingSitemap('businesses-1.xml')
   existingSitemap.forEach(url => {
     existingUrls.add(url.loc[0])
   })
-  
-  // Get total count of businesses
-  const { count } = await supabase
-    .from('businesses')
-    .select('*', { count: 'exact', head: true })
-  
-  if (!count) {
-    console.warn('No businesses found')
+
+  // Load categories and locations
+  const [categories, locations] = await Promise.all([
+    loadCategoriesFromCSV(),
+    loadLocationsFromCSV()
+  ])
+
+  if (!categories?.length || !locations?.length) {
+    console.warn('No categories or locations found')
     return []
   }
-  
-  console.log(`Found ${count} businesses in Supabase`)
+
+  console.log('Fetching filtered businesses for each category and location...')
   
   const sitemapFiles = []
   let currentSitemapIndex = 1
   let currentSitemapUrls: SitemapUrl[] = []
-  
-  // Fetch businesses in chunks of 1000 (Supabase limit)
-  for (let offset = 0; offset < count; offset += SUPABASE_CHUNK_SIZE) {
-    console.log(`Fetching businesses ${offset + 1} to ${Math.min(offset + SUPABASE_CHUNK_SIZE, count)}...`)
-    
-    const { data: businesses, error } = await supabase
-      .from('businesses')
-      .select('slug, updated_at')
-      .range(offset, offset + SUPABASE_CHUNK_SIZE - 1)
-    
-    if (error) {
-      console.error('Error fetching businesses:', error)
-      continue
-    }
-    
-    if (!businesses?.length) continue
-    
-    // Process each business
-    businesses.forEach((business: Business) => {
-      const url = `${BASE_URL}/biz/${business.slug}`
-      
-      // Skip if URL already exists and hasn't been updated
-      if (existingUrls.has(url)) {
-        const existingEntry = existingSitemap.find(entry => entry.loc[0] === url)
-        if (existingEntry && existingEntry.lastmod[0] === business.updated_at?.split('T')[0]) {
-          currentSitemapUrls.push(existingEntry)
-          return
-        }
-      }
-      
-      // Add new or updated entry
-      currentSitemapUrls.push({
-        loc: [url],
-        lastmod: [business.updated_at?.split('T')[0] || new Date().toISOString().split('T')[0]],
-        changefreq: [SITEMAP_CONFIG.businesses.changefreq],
-        priority: [SITEMAP_CONFIG.businesses.priority.toString()]
-      })
-    })
+  const processedBusinessIds = new Set<string>() // Track processed businesses
 
-    // Write sitemap if we've reached the maximum URLs per sitemap
-    if (currentSitemapUrls.length >= SITEMAP_MAX_URLS) {
-      await writeSitemap(currentSitemapUrls, `businesses-${currentSitemapIndex}.xml`)
-      sitemapFiles.push({
-        name: `businesses-${currentSitemapIndex}.xml`,
-        lastmod: new Date().toISOString().split('T')[0]
-      })
-      currentSitemapIndex++
-      currentSitemapUrls = []
+  // Process each category and location combination
+  for (const category of categories) {
+    console.log(`Processing category: ${category.name}`)
+    
+    for (const location of locations) {
+      const state = location.state_abbr.toLowerCase()
+      const city = normalizeUrlCity(location.city)
+
+      try {
+        // Use the same filtering logic as the website
+        const result = await getLocationBusinesses({
+          state,
+          city
+        })
+
+        // Only process if we have businesses
+        if (result.businesses && result.businesses.length > 0) {
+          for (const business of result.businesses) {
+            // Skip if we've already processed this business
+            if (processedBusinessIds.has(business.id!)) continue
+            processedBusinessIds.add(business.id!)
+
+            const url = `${BASE_URL}/biz/${business.slug}`
+
+            // Check if URL exists and hasn't been updated
+            if (existingUrls.has(url)) {
+              const existingEntry = existingSitemap.find(entry => entry.loc[0] === url)
+              if (existingEntry) {
+                currentSitemapUrls.push(existingEntry)
+                continue
+              }
+            }
+
+            // Add new or updated entry
+            currentSitemapUrls.push({
+              loc: [url],
+              lastmod: [new Date().toISOString().split('T')[0]],
+              changefreq: [SITEMAP_CONFIG.businesses.changefreq],
+              priority: [SITEMAP_CONFIG.businesses.priority.toString()]
+            })
+
+            // Write sitemap if we've reached the maximum URLs per sitemap
+            if (currentSitemapUrls.length >= SITEMAP_MAX_URLS) {
+              await writeSitemap(currentSitemapUrls, `businesses-${currentSitemapIndex}.xml`)
+              sitemapFiles.push({
+                name: `businesses-${currentSitemapIndex}.xml`,
+                lastmod: new Date().toISOString().split('T')[0]
+              })
+              currentSitemapIndex++
+              currentSitemapUrls = []
+            }
+          }
+        }
+      } catch (error) {
+        console.error(`Error processing ${category.name} in ${city}, ${state}:`, error)
+        continue
+      }
     }
   }
-  
+
   // Write remaining URLs if any
   if (currentSitemapUrls.length > 0) {
     await writeSitemap(currentSitemapUrls, `businesses-${currentSitemapIndex}.xml`)
@@ -147,7 +162,8 @@ async function generateBusinessSitemaps() {
       lastmod: new Date().toISOString().split('T')[0]
     })
   }
-  
+
+  console.log(`Total businesses processed: ${processedBusinessIds.size}`)
   return sitemapFiles
 }
 
