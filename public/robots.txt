@@ -1,0 +1,73 @@
+# Global rules
+User-agent: *
+
+# Allow crawling of valid paths
+Allow: /categories/
+Allow: /locations/
+Allow: /biz/
+Allow: /about/
+Allow: /contact/
+Allow: /privacy/
+Allow: /terms/
+Allow: /add-business/
+Allow: /claim-business/
+Allow: /*?page=*
+
+# Allow Next.js static assets
+Allow: /_next/static/
+Allow: /_next/image
+Allow: /_next/static/css/
+Allow: /_next/static/media/
+Allow: /_next/static/chunks/
+
+# Block sensitive paths
+Disallow: /api/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /*/edit
+Disallow: /*/*/edit
+Disallow: /debug/
+Disallow: /.env
+Disallow: /.env.*
+Disallow: /config/
+Disallow: /.git
+Disallow: /.github
+Disallow: /node_modules
+Disallow: /claim-business/*/verify
+Disallow: /business-center/*
+
+# Prevent crawling of invalid URL patterns
+Disallow: /*?*page=0
+Disallow: /*?*page=-
+Disallow: /categories/*/*/*/*  # No deeper than category/state/city
+Disallow: /*/categories/*      # Wrong categories position
+Disallow: /category/*          # Wrong singular form
+Disallow: /location/*          # Wrong singular form
+Disallow: /business/*          # Wrong business URL pattern
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*q=
+Disallow: /*preview=true
+Disallow: /*edit=true
+
+# Prevent old/invalid category patterns
+Disallow: /*/mn/*              # State abbreviation without categories prefix
+Disallow: /*/ca/*              # State abbreviation without categories prefix
+Disallow: /*/il/*              # State abbreviation without categories prefix
+Disallow: /*/fl/*              # State abbreviation without categories prefix
+Disallow: /*/va/*              # State abbreviation without categories prefix
+Disallow: /*/md/*              # State abbreviation without categories prefix
+
+# Block AI crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://getblynt.com/sitemap_index.xml
+
+# Crawl-delay for heavy crawlers
+Crawl-delay: 1

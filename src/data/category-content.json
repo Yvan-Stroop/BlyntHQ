@@ -1,0 +1,1472 @@
+{
+  "tire-shop": {
+    "name": "Tire Shop",
+    "description": "Automotive service centers specializing in tire sales, installation, and maintenance. Local tire shops provide expert guidance on tire selection, professional mounting services, and essential tire care for cars, trucks, and SUVs.",
+    "services": [
+      {
+        "name": "Tire Installation",
+        "priceRange": "$60 - $100 per tire",
+        "description": "Mounting, balancing, and installation of new tires",
+        "timeEstimate": "1-2 hours for full set"
+      },
+      {
+        "name": "Tire Rotation",
+        "priceRange": "$20 - $50",
+        "description": "Regular tire position rotation service",
+        "timeEstimate": "30-45 minutes"
+      },
+      {
+        "name": "Wheel Alignment",
+        "priceRange": "$75 - $200",
+        "description": "Four-wheel computerized alignment service",
+        "timeEstimate": "45-60 minutes"
+      },
+      {
+        "name": "Flat Repair",
+        "priceRange": "$20 - $40",
+        "description": "Puncture repair and tire patching",
+        "timeEstimate": "30-45 minutes"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Regular Inspection",
+        "description": "Check tire pressure and tread wear monthly",
+        "type": "do"
+      },
+      {
+        "title": "Compare Warranties",
+        "description": "Review tire warranty terms and mileage coverage",
+        "type": "do"
+      },
+      {
+        "title": "Mix Tire Types",
+        "description": "Use matching tires for optimal performance and safety",
+        "type": "dont"
+      },
+      {
+        "title": "Maintenance Schedule",
+        "description": "Follow recommended rotation and alignment intervals",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should tires be replaced?",
+        "answer": "Most passenger vehicle tires last 40,000-60,000 miles depending on driving conditions, maintenance, and tire quality. Tires should be replaced when tread depth reaches 2/32 inch or tires show signs of damage or aging."
+      },
+      {
+        "question": "What services do tire shops typically offer?",
+        "answer": "Most tire shops provide sales of new tires, mounting and balancing, rotations, alignments, flat repairs, and basic tire maintenance. Many also offer wheel balancing, TPMS service, and seasonal tire storage."
+      },
+      {
+        "question": "How often should tires be rotated?",
+        "answer": "Most manufacturers recommend tire rotation every 5,000-8,000 miles to ensure even wear. Regular rotation helps extend tire life and maintain vehicle performance."
+      },
+      {
+        "question": "What affects tire prices?",
+        "answer": "Tire prices vary based on size, brand, performance rating, and warranty coverage. Installation costs typically include mounting, balancing, and disposal fees for old tires."
+      }
+    ]
+  },
+  "liquor-store": {
+    "name": "Liquor Store",
+    "description": "Licensed retail establishments specializing in alcoholic beverage sales. Local liquor stores offer a selection of spirits, wines, and beers, with knowledgeable staff providing guidance on product selection and special orders.",
+    "services": [
+      {
+        "name": "Retail Sales",
+        "priceRange": "Varies by product",
+        "description": "Wide selection of spirits, wines, and beers",
+        "timeEstimate": "Self-service shopping"
+      },
+      {
+        "name": "Special Orders",
+        "priceRange": "Varies by product",
+        "description": "Custom ordering of specific products",
+        "timeEstimate": "3-10 business days"
+      },
+      {
+        "name": "Party Planning",
+        "priceRange": "Free consultation",
+        "description": "Event quantity and selection guidance",
+        "timeEstimate": "15-30 minutes"
+      },
+      {
+        "name": "Gift Services",
+        "priceRange": "$5 - $20",
+        "description": "Gift wrapping and packaging services",
+        "timeEstimate": "5-15 minutes"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Verify ID Requirements",
+        "description": "Bring valid government-issued photo ID for purchases",
+        "type": "do"
+      },
+      {
+        "title": "Check Store Hours",
+        "description": "Note local alcohol sale time restrictions",
+        "type": "do"
+      },
+      {
+        "title": "Ignore Storage Guidelines",
+        "description": "Follow proper storage recommendations for wine and beer",
+        "type": "dont"
+      },
+      {
+        "title": "Sale Restrictions",
+        "description": "Be aware of local laws regarding quantity and hours",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What are typical operating hours?",
+        "answer": "Hours vary by state and local regulations. Many stores operate during standard retail hours, though some states restrict Sunday sales or have specific closing times. Holiday restrictions may apply."
+      },
+      {
+        "question": "What forms of ID are accepted?",
+        "answer": "Most stores accept valid government-issued photo identification such as driver's licenses, state ID cards, military IDs, and passports. Expired IDs are typically not accepted."
+      },
+      {
+        "question": "Do stores offer bulk purchase discounts?",
+        "answer": "Many stores offer case discounts on wine and volume discounts for large purchases or events. Discount policies vary by location and local regulations."
+      },
+      {
+        "question": "Can stores special order products?",
+        "answer": "Most stores can special order items not regularly stocked. Availability and delivery times vary by distributor and state regulations. Some items may require minimum purchase quantities."
+      }
+    ]
+  },
+  "supermarket": {
+    "name": "Supermarket",
+    "description": "Full-service grocery stores offering a wide selection of fresh produce, meats, dairy, pantry items, and household essentials. Local supermarkets provide convenient one-stop shopping with competitive prices and various departments to meet all grocery and household needs.",
+    "services": [
+      {
+        "name": "Pharmacy Services",
+        "priceRange": "Varies by prescription",
+        "description": "Full-service pharmacy with prescription filling and consultations",
+        "timeEstimate": "15-30 minutes"
+      },
+      {
+        "name": "Deli Counter",
+        "priceRange": "$5 - $15 per pound",
+        "description": "Fresh sliced meats, cheeses, and prepared foods",
+        "timeEstimate": "5-15 minutes"
+      },
+      {
+        "name": "Grocery Delivery",
+        "priceRange": "$10 - $20",
+        "description": "Home delivery service for grocery orders",
+        "timeEstimate": "2-4 hours"
+      },
+      {
+        "name": "Curbside Pickup",
+        "priceRange": "$0 - $5",
+        "description": "Online ordering with convenient pickup service",
+        "timeEstimate": "1-2 hours"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Check Weekly Ads",
+        "description": "Most supermarkets publish weekly sales and promotions to help maximize savings",
+        "type": "do"
+      },
+      {
+        "title": "Join Loyalty Program",
+        "description": "Many stores offer loyalty cards with points and discounts",
+        "type": "do"
+      },
+      {
+        "title": "Shop Without List",
+        "description": "Shopping with a list helps avoid impulse purchases and saves money",
+        "type": "dont"
+      },
+      {
+        "title": "Store Hours",
+        "description": "Check individual store hours, as they vary by location and may have special holiday schedules",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What are typical supermarket hours?",
+        "answer": "Most supermarkets operate daily from early morning until late evening, with some locations offering 24-hour service. Hours vary by location and may be different on holidays."
+      },
+      {
+        "question": "Do supermarkets typically price match?",
+        "answer": "Many supermarkets offer price matching with local competitors. Customers usually need to provide current ad or digital proof of competitor pricing."
+      },
+      {
+        "question": "How do supermarket loyalty programs work?",
+        "answer": "Most supermarket loyalty programs offer points for purchases, digital coupons, and exclusive member discounts. Points can often be redeemed for grocery discounts or gas savings at participating stations."
+      },
+      {
+        "question": "What are standard return policies?",
+        "answer": "Most supermarkets allow returns within 30 days with receipt. Perishable items typically have different return policies. Some stores offer refunds or exchanges without receipts at their discretion."
+      }
+    ]
+  },
+  "fitness-center": {
+    "name": "Fitness Center",
+    "description": "Modern fitness facilities offering comprehensive exercise equipment, group classes, and personal training services. Local fitness centers provide welcoming environments for members of all fitness levels, with amenities designed to support health and wellness goals.",
+    "services": [
+      {
+        "name": "Gym Membership",
+        "priceRange": "$30 - $100 monthly",
+        "description": "Access to facility, equipment, and basic amenities",
+        "timeEstimate": "Monthly subscription"
+      },
+      {
+        "name": "Personal Training",
+        "priceRange": "$50 - $100 per session",
+        "description": "One-on-one customized training sessions",
+        "timeEstimate": "45-60 minutes"
+      },
+      {
+        "name": "Group Classes",
+        "priceRange": "$10 - $20 per class",
+        "description": "Variety of instructor-led fitness classes",
+        "timeEstimate": "45-60 minutes"
+      },
+      {
+        "name": "Fitness Assessment",
+        "priceRange": "$50 - $150",
+        "description": "Comprehensive fitness evaluation and goal setting",
+        "timeEstimate": "60-90 minutes"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Visit Multiple Centers",
+        "description": "Tour several local fitness centers to find the best fit for your needs and budget",
+        "type": "do"
+      },
+      {
+        "title": "Read Contract Terms",
+        "description": "Review membership terms and cancellation policies carefully before signing",
+        "type": "do"
+      },
+      {
+        "title": "Skip Trial Period",
+        "description": "Take advantage of free trials or guest passes before committing to membership",
+        "type": "dont"
+      },
+      {
+        "title": "Peak Hours",
+        "description": "Ask about peak hours and class schedules to plan the best times to visit",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What are typical fitness center hours?",
+        "answer": "Most fitness centers operate daily, with many locations offering 24/7 access. Staffed hours and class schedules vary by location, so it's best to check with individual facilities."
+      },
+      {
+        "question": "Do fitness centers usually offer free trials?",
+        "answer": "Most fitness centers provide free trial periods or guest passes for potential members to experience their facilities and services before joining. Trial periods typically range from 1 day to 1 week."
+      },
+      {
+        "question": "What's typically included in memberships?",
+        "answer": "Basic memberships usually include access to equipment, locker rooms, and some classes. Premium memberships often include additional amenities like towel service, guest passes, and unlimited classes. Amenities vary by location."
+      },
+      {
+        "question": "Can membership be frozen?",
+        "answer": "Most fitness centers allow members to temporarily freeze their membership for a small fee, typically for medical reasons or extended travel. Policies and fees vary by location."
+      }
+    ]
+  },
+  "dollar-store": {
+    "name": "Dollar Store",
+    "description": "Retail stores offering a wide variety of household items, seasonal merchandise, and everyday essentials at discounted prices. Local dollar stores provide budget-friendly shopping options for basic supplies, party goods, cleaning products, and various household necessities.",
+    "services": [
+      {
+        "name": "Household Essentials",
+        "priceRange": "$1 - $5",
+        "description": "Basic home supplies and cleaning products",
+        "timeEstimate": "15-30 minutes"
+      },
+      {
+        "name": "Party Supplies",
+        "priceRange": "$1 - $10",
+        "description": "Decorations, tableware, and party accessories",
+        "timeEstimate": "20-40 minutes"
+      },
+      {
+        "name": "Seasonal Items",
+        "priceRange": "$1 - $10",
+        "description": "Holiday decorations and seasonal merchandise",
+        "timeEstimate": "15-30 minutes"
+      },
+      {
+        "name": "Bulk Purchasing",
+        "priceRange": "Varies",
+        "description": "Quantity discounts on larger purchases",
+        "timeEstimate": "30-45 minutes"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Check Product Quality",
+        "description": "Inspect items carefully as quality can vary between brands and products",
+        "type": "do"
+      },
+      {
+        "title": "Compare Unit Prices",
+        "description": "Calculate cost per unit to ensure you're getting the best value",
+        "type": "do"
+      },
+      {
+        "title": "Assume All Items Are $1",
+        "description": "Many dollar stores now have varying price points up to $5 or more",
+        "type": "dont"
+      },
+      {
+        "title": "New Stock Days",
+        "description": "Ask about restocking schedules for best selection of seasonal items",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What are typical dollar store hours?",
+        "answer": "Most dollar stores operate during standard retail hours, typically 8 AM to 9 PM or 10 PM daily. Hours may vary by location and some stores have extended hours during holiday seasons."
+      },
+      {
+        "question": "Do dollar stores accept returns?",
+        "answer": "Return policies vary by store chain. Most dollar stores accept returns within 30 days with receipt, though some items may be final sale. It's recommended to check the policy at specific locations."
+      },
+      {
+        "question": "What payment methods are accepted?",
+        "answer": "Most dollar stores accept cash, credit cards, and debit cards. Some locations also accept EBT cards for eligible items. Specific payment options may vary by location."
+      },
+      {
+        "question": "Do dollar stores offer bulk discounts?",
+        "answer": "Many dollar stores offer case quantity discounts or special pricing for bulk purchases. Discount policies and minimum quantities vary by location and item type."
+      }
+    ]
+  },
+  "wedding-venue": {
+    "name": "Wedding Venue",
+    "description": "Event spaces specifically designed or adapted for hosting wedding ceremonies and receptions. Local wedding venues range from traditional banquet halls to unique locations like barns, gardens, or historic buildings, offering various amenities and services for celebrating special occasions.",
+    "services": [
+      {
+        "name": "Venue Rental",
+        "priceRange": "$2,000 - $15,000",
+        "description": "Basic venue rental including standard amenities",
+        "timeEstimate": "4-8 hours"
+      },
+      {
+        "name": "Wedding Package",
+        "priceRange": "$5,000 - $25,000",
+        "description": "Comprehensive package including catering and setup",
+        "timeEstimate": "6-12 hours"
+      },
+      {
+        "name": "Ceremony Only",
+        "priceRange": "$1,000 - $5,000",
+        "description": "Venue rental for ceremony without reception",
+        "timeEstimate": "2-4 hours"
+      },
+      {
+        "name": "Rehearsal Time",
+        "priceRange": "$200 - $500",
+        "description": "Venue access for wedding rehearsal",
+        "timeEstimate": "1-2 hours"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Book Early",
+        "description": "Popular venues often book 12-18 months in advance, especially for peak season dates",
+        "type": "do"
+      },
+      {
+        "title": "Get Details in Writing",
+        "description": "Ensure all services, fees, and policies are clearly outlined in the contract",
+        "type": "do"
+      },
+      {
+        "title": "Skip Site Visit",
+        "description": "Always visit the venue in person before booking, ideally at your planned event time",
+        "type": "dont"
+      },
+      {
+        "title": "Weather Plans",
+        "description": "Confirm backup plans for outdoor venues in case of inclement weather",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What's typically included in venue rental?",
+        "answer": "Basic venue rentals usually include the space, tables, chairs, and basic setup/cleanup. Additional services like catering, decorations, and audio equipment may be available at extra cost or through required vendors."
+      },
+      {
+        "question": "How far in advance should venues be booked?",
+        "answer": "Popular wedding venues typically require booking 12-18 months in advance for peak season dates (spring and fall). Off-season dates may be available with shorter notice."
+      },
+      {
+        "question": "What about vendor restrictions?",
+        "answer": "Many venues have preferred vendor lists or restrictions on outside vendors. Some may require using in-house services for catering, alcohol service, or coordination. These policies vary significantly by venue."
+      },
+      {
+        "question": "What's the typical deposit requirement?",
+        "answer": "Most venues require a deposit of 25-50% of the total rental fee to secure a date. Payment schedules and cancellation policies vary by venue, so it's important to review contract terms carefully."
+      }
+    ]
+  },
+  "family-law-attorney": {
+    "name": "Family Law Attorney",
+    "description": "Legal professionals specializing in matters relating to family relationships, including divorce, child custody, adoption, and domestic issues. Local family law attorneys provide guidance and representation through complex family matters while protecting their clients' rights and interests.",
+    "services": [
+      {
+        "name": "Initial Consultation",
+        "priceRange": "$0 - $300",
+        "description": "Initial meeting to discuss legal situation and options",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Divorce Representation",
+        "priceRange": "$2,500 - $15,000+",
+        "description": "Full legal representation throughout divorce proceedings",
+        "timeEstimate": "3-12 months"
+      },
+      {
+        "name": "Child Custody Services",
+        "priceRange": "$3,000 - $20,000+",
+        "description": "Legal representation for custody and visitation matters",
+        "timeEstimate": "2-12 months"
+      },
+      {
+        "name": "Document Preparation",
+        "priceRange": "$500 - $2,500",
+        "description": "Preparation of legal documents and agreements",
+        "timeEstimate": "1-4 weeks"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Check Credentials",
+        "description": "Verify attorney's license and specialization in family law",
+        "type": "do"
+      },
+      {
+        "title": "Document Everything",
+        "description": "Keep detailed records of all communications and events",
+        "type": "do"
+      },
+      {
+        "title": "Withhold Information",
+        "description": "Be completely honest with your attorney about all aspects of your case",
+        "type": "dont"
+      },
+      {
+        "title": "Fee Structure",
+        "description": "Understand billing practices and get fee agreements in writing",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How long do family law cases typically take?",
+        "answer": "Timeline varies significantly based on case complexity and court schedules. Simple uncontested divorces might take 2-3 months, while contested cases involving custody disputes can take a year or more."
+      },
+      {
+        "question": "What are typical fee structures?",
+        "answer": "Most family law attorneys charge hourly rates ranging from $150-$500 per hour. Some may offer flat fees for simple services. Initial consultations may be free or charged at a reduced rate."
+      },
+      {
+        "question": "What documents are needed for an initial consultation?",
+        "answer": "Typically, clients should bring any court documents, correspondence, financial records, and other relevant paperwork related to their case. Specific requirements vary based on the legal matter."
+      },
+      {
+        "question": "Can family law matters be handled without an attorney?",
+        "answer": "While some people handle family law matters pro se (without an attorney), it's often advisable to seek legal representation, especially for complex cases involving children or significant assets."
+      }
+    ]
+  },
+  "general-practice-attorney": {
+    "name": "General Practice Attorney",
+    "description": "Legal professionals who handle a broad range of legal matters including civil litigation, contracts, real estate, and basic criminal law. Local general practice attorneys provide versatile legal services and can refer clients to specialists when needed.",
+    "services": [
+      {
+        "name": "Legal Consultation",
+        "priceRange": "$0 - $250",
+        "description": "Initial meeting to discuss legal issues and options",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Contract Review",
+        "priceRange": "$300 - $1,000",
+        "description": "Review and analysis of legal documents",
+        "timeEstimate": "1-3 days"
+      },
+      {
+        "name": "Legal Representation",
+        "priceRange": "$2,000 - $10,000+",
+        "description": "Ongoing legal representation for various matters",
+        "timeEstimate": "Varies by case"
+      },
+      {
+        "name": "Document Preparation",
+        "priceRange": "$300 - $1,500",
+        "description": "Drafting of legal documents and agreements",
+        "timeEstimate": "1-2 weeks"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Verify Experience",
+        "description": "Ask about experience with your specific type of legal issue",
+        "type": "do"
+      },
+      {
+        "title": "Get Clear Scope",
+        "description": "Establish exactly what services will be provided and at what cost",
+        "type": "do"
+      },
+      {
+        "title": "Delay Seeking Help",
+        "description": "Contact an attorney early when legal issues arise",
+        "type": "dont"
+      },
+      {
+        "title": "Communication Policy",
+        "description": "Understand how and when the attorney will communicate updates",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What types of cases do general practice attorneys handle?",
+        "answer": "General practice attorneys typically handle a variety of matters including basic civil litigation, contracts, real estate transactions, wills and estates, and minor criminal cases. They often refer complex specialized cases to other attorneys."
+      },
+      {
+        "question": "How are fees typically structured?",
+        "answer": "Fee structures vary by type of case and service. Common arrangements include hourly rates ($150-$400/hour), flat fees for specific services, and contingency fees for certain types of cases. Many offer free or low-cost initial consultations."
+      },
+      {
+        "question": "When should someone consult a general practice attorney?",
+        "answer": "It's advisable to consult an attorney when facing any legal issue, starting a business, signing major contracts, or dealing with disputes that could lead to litigation. Early consultation can often prevent larger legal problems."
+      },
+      {
+        "question": "What's the difference between general practice and specialized attorneys?",
+        "answer": "General practice attorneys handle a broad range of basic legal matters, while specialists focus on specific areas of law. General practitioners often help identify when a specialist is needed and can make appropriate referrals."
+      }
+    ]
+  },
+  "gutter-cleaning-service": {
+    "name": "Gutter Cleaning Service",
+    "description": "Professional services specializing in the cleaning, maintenance, and repair of residential and commercial gutters and downspouts. Local gutter cleaning services help prevent water damage and maintain proper drainage systems for homes and buildings.",
+    "services": [
+      {
+        "name": "Basic Gutter Cleaning",
+        "priceRange": "$100 - $300",
+        "description": "Removal of debris and flushing of gutters and downspouts",
+        "timeEstimate": "1-3 hours"
+      },
+      {
+        "name": "Gutter Inspection",
+        "priceRange": "$50 - $150",
+        "description": "Thorough assessment of gutter system condition",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Gutter Repair",
+        "priceRange": "$150 - $500",
+        "description": "Fixing leaks, sagging, and damaged sections",
+        "timeEstimate": "2-4 hours"
+      },
+      {
+        "name": "Gutter Guard Installation",
+        "priceRange": "$300 - $1,500",
+        "description": "Installation of protective gutter cover systems",
+        "timeEstimate": "2-6 hours"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Check Insurance",
+        "description": "Verify service provider has liability insurance and workers' compensation",
+        "type": "do"
+      },
+      {
+        "title": "Regular Maintenance",
+        "description": "Schedule cleanings at least twice yearly, more if near trees",
+        "type": "do"
+      },
+      {
+        "title": "Ignore Warning Signs",
+        "description": "Address overflowing gutters and visible sagging promptly",
+        "type": "dont"
+      },
+      {
+        "title": "Safety Equipment",
+        "description": "Confirm services use proper safety equipment and follow protocols",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should gutters be cleaned?",
+        "answer": "Frequency depends on nearby trees and local climate. Most homes need cleaning twice yearly - spring and fall. Homes near pine trees or with heavy tree coverage may need quarterly cleaning."
+      },
+      {
+        "question": "What factors affect gutter cleaning costs?",
+        "answer": "Pricing typically varies based on home size, gutter length, number of stories, roof pitch, amount of debris, and accessibility. Some services charge by linear foot while others charge flat rates based on house size."
+      },
+      {
+        "question": "What's included in a standard cleaning?",
+        "answer": "Standard service typically includes removing debris from gutters and downspouts, flushing with water to check flow, and basic inspection. Additional services like repairs or gutter guard installation are usually extra."
+      },
+      {
+        "question": "Are gutter guards worth installing?",
+        "answer": "Gutter guards can reduce cleaning frequency but don't eliminate the need entirely. Cost-effectiveness depends on local tree coverage, climate conditions, and specific guard system quality."
+      }
+    ]
+  },
+  "hairdresser": {
+    "name": "Hairdresser",
+    "description": "Professional hair care specialists providing cutting, styling, coloring, and treatment services. Local hairdressers offer personalized hair care solutions and styling expertise for clients of all ages and hair types.",
+    "services": [
+      {
+        "name": "Haircut and Style",
+        "priceRange": "$30 - $80",
+        "description": "Professional cut and basic styling service",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Hair Coloring",
+        "priceRange": "$60 - $200+",
+        "description": "Full color, highlights, or specialized techniques",
+        "timeEstimate": "1-3 hours"
+      },
+      {
+        "name": "Treatment Services",
+        "priceRange": "$25 - $100",
+        "description": "Deep conditioning, keratin, or specialty treatments",
+        "timeEstimate": "30-90 minutes"
+      },
+      {
+        "name": "Special Event Styling",
+        "priceRange": "$50 - $150",
+        "description": "Formal styling for weddings and special occasions",
+        "timeEstimate": "45-90 minutes"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Bring References",
+        "description": "Show pictures of desired styles for clear communication",
+        "type": "do"
+      },
+      {
+        "title": "Discuss Maintenance",
+        "description": "Ask about upkeep requirements for new styles or colors",
+        "type": "do"
+      },
+      {
+        "title": "Skip Consultation",
+        "description": "Always discuss goals and expectations before major changes",
+        "type": "dont"
+      },
+      {
+        "title": "Appointment Timing",
+        "description": "Book well in advance for special events or peak times",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should hair be cut?",
+        "answer": "Recommended frequency varies by hair type and style. Generally, every 4-8 weeks for short styles, every 8-12 weeks for longer styles. Split ends and style maintenance often determine timing."
+      },
+      {
+        "question": "What affects hair service pricing?",
+        "answer": "Prices vary based on hair length, thickness, service complexity, stylist experience, and salon location. Additional services like toning, corrective color, or special treatments incur extra charges."
+      },
+      {
+        "question": "How long do color services last?",
+        "answer": "Color longevity depends on the type of color service, hair care routine, and natural hair growth. Permanent color typically needs maintenance every 4-6 weeks, while some specialty colors may require more frequent touch-ups."
+      },
+      {
+        "question": "What should clients bring to appointments?",
+        "answer": "Clients should bring reference photos of desired styles, wear appropriate clothing for services, and be prepared to discuss hair history and maintenance routine. New clients may need extra time for consultation."
+      }
+    ]
+  },
+  "ac-repair-service": {
+    "name": "Air Conditioning Repair Service",
+    "description": "Professional technicians specializing in the diagnosis, repair, and maintenance of residential and commercial air conditioning systems. Local AC repair services help maintain comfortable indoor temperatures and ensure efficient operation of cooling equipment.",
+    "services": [
+      {
+        "name": "AC Diagnostic Service",
+        "priceRange": "$75 - $150",
+        "description": "System inspection and problem identification",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Repair Service",
+        "priceRange": "$150 - $1,000+",
+        "description": "Fixing system issues and replacing parts",
+        "timeEstimate": "1-4 hours"
+      },
+      {
+        "name": "Maintenance Service",
+        "priceRange": "$100 - $250",
+        "description": "Regular system cleaning and preventive care",
+        "timeEstimate": "1-2 hours"
+      },
+      {
+        "name": "Emergency Service",
+        "priceRange": "$200 - $400",
+        "description": "After-hours or urgent repair services",
+        "timeEstimate": "1-3 hours"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Verify Licensing",
+        "description": "Ensure technicians are licensed and certified for HVAC work",
+        "type": "do"
+      },
+      {
+        "title": "Regular Maintenance",
+        "description": "Schedule annual maintenance to prevent major repairs",
+        "type": "do"
+      },
+      {
+        "title": "Ignore Strange Sounds",
+        "description": "Address unusual noises or reduced cooling promptly",
+        "type": "dont"
+      },
+      {
+        "title": "System Age",
+        "description": "Consider unit age when deciding between repair and replacement",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should AC systems be serviced?",
+        "answer": "Most manufacturers recommend annual maintenance, ideally in spring before the cooling season begins. Systems used year-round or in extreme climates may need bi-annual service."
+      },
+      {
+        "question": "What are common signs AC repair is needed?",
+        "answer": "Common indicators include weak airflow, warm air output, unusual noises, frequent cycling, higher energy bills, and inconsistent cooling. Strange odors or water leaks also warrant professional inspection."
+      },
+      {
+        "question": "What affects repair costs?",
+        "answer": "Repair costs vary based on the problem severity, parts needed, system age and type, service timing (emergency vs. scheduled), and local market rates."
+      },
+      {
+        "question": "When should an AC unit be replaced?",
+        "answer": "Consider replacement if the unit is over 10-15 years old, requires frequent repairs, has major component failure, or if repair costs exceed 50% of replacement cost. Energy efficiency improvements may also justify replacement."
+      }
+    ]
+  },
+  "window-cleaning-service": {
+    "name": "Window Cleaning Service",
+    "description": "Professional services specializing in cleaning and maintaining residential and commercial windows. Local window cleaners provide expertise in safely accessing and thoroughly cleaning windows of all types, including hard-to-reach areas and multi-story buildings.",
+    "services": [
+      {
+        "name": "Basic Window Cleaning",
+        "priceRange": "$8 - $20 per window",
+        "description": "Interior and exterior window cleaning",
+        "timeEstimate": "2-4 hours average home"
+      },
+      {
+        "name": "Screen Cleaning",
+        "priceRange": "$5 - $10 per screen",
+        "description": "Removal, cleaning, and replacement of screens",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Track and Sill Cleaning",
+        "priceRange": "$3 - $7 per window",
+        "description": "Detailed cleaning of window tracks and sills",
+        "timeEstimate": "1-2 hours"
+      },
+      {
+        "name": "High-Rise Service",
+        "priceRange": "$15 - $40 per window",
+        "description": "Cleaning of elevated or difficult access windows",
+        "timeEstimate": "Varies by building"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Check Insurance",
+        "description": "Verify service has liability insurance and worker's compensation",
+        "type": "do"
+      },
+      {
+        "title": "Regular Schedule",
+        "description": "Set up routine cleaning schedule based on environment",
+        "type": "do"
+      },
+      {
+        "title": "DIY High Windows",
+        "description": "Leave elevated window cleaning to insured professionals",
+        "type": "dont"
+      },
+      {
+        "title": "Weather Conditions",
+        "description": "Schedule cleaning on appropriate weather days",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should windows be professionally cleaned?",
+        "answer": "Frequency depends on location and environment. Residential windows typically need cleaning every 6-12 months. Commercial properties or areas with high pollution may need quarterly cleaning."
+      },
+      {
+        "question": "What factors affect window cleaning costs?",
+        "answer": "Pricing varies based on number and size of windows, accessibility, level of dirt, special equipment needed, and whether additional services like screen or track cleaning are included."
+      },
+      {
+        "question": "What's included in standard window cleaning?",
+        "answer": "Standard service typically includes cleaning both sides of glass, wiping frames and sills, and cleaning tracks. Screen cleaning, hard water treatment, or paint removal usually cost extra."
+      },
+      {
+        "question": "How long does window cleaning take?",
+        "answer": "Time varies by home size and window count. An average home (20-25 windows) typically takes 2-4 hours. Large homes or those with special requirements may take longer."
+      }
+    ]
+  },
+  "dental-clinic": {
+    "name": "Dental Clinic",
+    "description": "Healthcare facilities specializing in oral health services and dental procedures. Local dental clinics provide preventive care, restorative treatments, and emergency dental services, staffed by licensed dentists and dental professionals.",
+    "services": [
+      {
+        "name": "Regular Cleaning & Exam",
+        "priceRange": "$100 - $300",
+        "description": "Professional cleaning, exam, and basic X-rays",
+        "timeEstimate": "45-60 minutes"
+      },
+      {
+        "name": "Cavity Filling",
+        "priceRange": "$150 - $400",
+        "description": "Treatment of tooth decay with dental filling",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Crown Procedure",
+        "priceRange": "$800 - $2,000",
+        "description": "Full tooth crown placement and fitting",
+        "timeEstimate": "2 visits, 1-2 hours each"
+      },
+      {
+        "name": "Emergency Service",
+        "priceRange": "$200 - $500+",
+        "description": "Urgent care for dental emergencies",
+        "timeEstimate": "30-90 minutes"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Insurance Verification",
+        "description": "Verify insurance coverage and in-network status before visit",
+        "type": "do"
+      },
+      {
+        "title": "Regular Checkups",
+        "description": "Schedule preventive visits every 6 months",
+        "type": "do"
+      },
+      {
+        "title": "Ignore Pain",
+        "description": "Address dental issues promptly to prevent complications",
+        "type": "dont"
+      },
+      {
+        "title": "Medical History",
+        "description": "Provide complete health history and medication list",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should patients visit the dentist?",
+        "answer": "Most dental professionals recommend checkups and cleanings every 6 months for preventive care. Patients with specific oral health issues may need more frequent visits."
+      },
+      {
+        "question": "What insurance do dental clinics typically accept?",
+        "answer": "Most clinics accept major dental insurance plans and may offer payment plans. Coverage varies by plan and procedure. It's recommended to verify coverage before scheduling treatment."
+      },
+      {
+        "question": "What constitutes a dental emergency?",
+        "answer": "Dental emergencies include severe pain, knocked-out teeth, broken teeth, lost fillings or crowns, bleeding gums, or severe infection. Many clinics offer after-hours emergency services."
+      },
+      {
+        "question": "What credentials should dental clinics have?",
+        "answer": "Dental clinics should be staffed by licensed dentists and hygienists. Look for state dental board licensing, professional association memberships, and ongoing education certifications."
+      }
+    ]
+  },
+  "mechanic": {
+    "name": "Mechanic",
+    "description": "Automotive service professionals specializing in vehicle maintenance, diagnosis, and repair. Local mechanics provide essential car care services ranging from routine maintenance to complex repairs for all types of vehicles.",
+    "services": [
+      {
+        "name": "Oil Change Service",
+        "priceRange": "$30 - $80",
+        "description": "Oil and filter replacement with inspection",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Brake Service",
+        "priceRange": "$150 - $800",
+        "description": "Brake inspection, pad replacement, or rotor service",
+        "timeEstimate": "1-4 hours"
+      },
+      {
+        "name": "Diagnostic Service",
+        "priceRange": "$50 - $150",
+        "description": "Computer diagnostic and problem identification",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Major Repair",
+        "priceRange": "$500 - $3,000+",
+        "description": "Engine, transmission, or major system repair",
+        "timeEstimate": "1-5 days"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Check Certification",
+        "description": "Look for ASE-certified technicians and proper licensing",
+        "type": "do"
+      },
+      {
+        "title": "Keep Records",
+        "description": "Maintain detailed service records and receipts",
+        "type": "do"
+      },
+      {
+        "title": "Skip Maintenance",
+        "description": "Follow manufacturer's recommended maintenance schedule",
+        "type": "dont"
+      },
+      {
+        "title": "Written Estimates",
+        "description": "Get detailed written estimates before authorizing work",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should vehicles be serviced?",
+        "answer": "Service intervals depend on vehicle make, model, and usage. Most vehicles need oil changes every 5,000-7,500 miles and major service every 30,000 miles. Consult the owner's manual for specific recommendations."
+      },
+      {
+        "question": "What certifications should mechanics have?",
+        "answer": "Look for ASE (Automotive Service Excellence) certification, which indicates professional competency. Many mechanics also have manufacturer-specific certifications for particular brands."
+      },
+      {
+        "question": "What affects repair costs?",
+        "answer": "Repair costs vary based on vehicle make/model, parts required, labor time, shop location, and technician expertise. Some shops charge flat rates for common services while others charge by labor hour."
+      },
+      {
+        "question": "How long do repairs typically take?",
+        "answer": "Service time varies greatly by repair type. Simple maintenance might take 1-2 hours, while complex repairs could take several days. Most shops can provide time estimates before starting work."
+      }
+    ]
+  },
+  "beauty-salon": {
+    "name": "Beauty Salon",
+    "description": "Professional establishments offering comprehensive beauty and personal care services. Local beauty salons provide hair styling, nail care, skincare treatments, and other cosmetic services in a welcoming environment with licensed beauty professionals.",
+    "services": [
+      {
+        "name": "Manicure & Pedicure",
+        "priceRange": "$25 - $75",
+        "description": "Professional nail care and maintenance",
+        "timeEstimate": "30-90 minutes"
+      },
+      {
+        "name": "Facial Treatment",
+        "priceRange": "$50 - $150",
+        "description": "Skincare and facial rejuvenation services",
+        "timeEstimate": "45-90 minutes"
+      },
+      {
+        "name": "Waxing Services",
+        "priceRange": "$15 - $80",
+        "description": "Hair removal for various body areas",
+        "timeEstimate": "15-60 minutes"
+      },
+      {
+        "name": "Makeup Application",
+        "priceRange": "$50 - $150",
+        "description": "Professional makeup for special occasions",
+        "timeEstimate": "45-60 minutes"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Check Licensing",
+        "description": "Verify technicians have current state cosmetology licenses",
+        "type": "do"
+      },
+      {
+        "title": "Communicate Clearly",
+        "description": "Discuss expectations and desired results before services",
+        "type": "do"
+      },
+      {
+        "title": "Skip Patch Tests",
+        "description": "Always do patch tests for new products or treatments",
+        "type": "dont"
+      },
+      {
+        "title": "Booking Timeline",
+        "description": "Schedule well in advance for special events",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What qualifications should beauty professionals have?",
+        "answer": "Beauty professionals should hold current state cosmetology licenses. Additional certifications may be required for specialized services like permanent makeup or advanced skincare treatments."
+      },
+      {
+        "question": "How are pricing tiers typically structured?",
+        "answer": "Pricing often varies based on technician experience level, service complexity, products used, and time required. Many salons offer tiered pricing with junior to master level professionals."
+      },
+      {
+        "question": "What safety protocols should salons follow?",
+        "answer": "Salons should maintain clean workstations, properly sanitize tools, use new or sanitized equipment for each client, and follow state health department guidelines. Patch tests should be offered for new products."
+      },
+      {
+        "question": "How often should beauty services be scheduled?",
+        "answer": "Maintenance schedules vary by service: manicures every 2-3 weeks, facials every 4-6 weeks, waxing every 4-6 weeks. Individual needs and preferences may require different intervals."
+      }
+    ]
+  },
+  "construction-company": {
+    "name": "Construction Company",
+    "description": "Professional contractors specializing in residential and commercial construction projects. Local construction companies provide services ranging from new building construction to renovations and remodels, with expertise in project management and building code compliance.",
+    "services": [
+      {
+        "name": "New Construction",
+        "priceRange": "$150 - $400 per sq ft",
+        "description": "Complete building construction from ground up",
+        "timeEstimate": "6-12 months"
+      },
+      {
+        "name": "Home Renovation",
+        "priceRange": "$10,000 - $150,000+",
+        "description": "Major home remodeling and updates",
+        "timeEstimate": "1-6 months"
+      },
+      {
+        "name": "Room Addition",
+        "priceRange": "$20,000 - $100,000",
+        "description": "Adding new rooms or extending space",
+        "timeEstimate": "2-4 months"
+      },
+      {
+        "name": "Commercial Build-Out",
+        "priceRange": "$50 - $250 per sq ft",
+        "description": "Commercial space construction and finishing",
+        "timeEstimate": "3-8 months"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Verify Credentials",
+        "description": "Check licensing, insurance, and bonding status",
+        "type": "do"
+      },
+      {
+        "title": "Get Multiple Bids",
+        "description": "Compare at least three detailed project proposals",
+        "type": "do"
+      },
+      {
+        "title": "Skip Written Contract",
+        "description": "Always get detailed contracts with specifications",
+        "type": "dont"
+      },
+      {
+        "title": "Payment Schedule",
+        "description": "Establish clear payment terms and milestones",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What should be included in a construction contract?",
+        "answer": "Contracts should detail scope of work, materials, timeline, payment schedule, change order process, warranties, permits, and dispute resolution procedures. All specifications and allowances should be clearly stated."
+      },
+      {
+        "question": "What insurance should construction companies carry?",
+        "answer": "Companies should maintain general liability insurance, workers' compensation, builder's risk insurance, and commercial vehicle coverage. Bond requirements vary by project type and location."
+      },
+      {
+        "question": "How are construction projects typically scheduled?",
+        "answer": "Projects follow phase schedules including planning, permitting, site preparation, foundation, framing, mechanicals, finishing, and punch list completion. Weather and material availability can impact timelines."
+      },
+      {
+        "question": "What affects construction costs?",
+        "answer": "Costs vary based on project size, materials quality, site conditions, local building requirements, labor rates, and project complexity. Market conditions and material availability can also impact pricing."
+      }
+    ]
+  },
+  "insurance-company": {
+    "name": "Insurance Company",
+    "description": "Professional firms providing various types of insurance coverage for individuals and businesses. Local insurance companies offer policies for auto, home, life, health, and business protection, with licensed agents providing guidance on coverage options.",
+    "services": [
+      {
+        "name": "Auto Insurance",
+        "priceRange": "$50 - $200 monthly",
+        "description": "Vehicle coverage for liability and damages",
+        "timeEstimate": "30-60 minutes for quote"
+      },
+      {
+        "name": "Home Insurance",
+        "priceRange": "$80 - $300 monthly",
+        "description": "Property and liability coverage for homes",
+        "timeEstimate": "45-60 minutes for quote"
+      },
+      {
+        "name": "Life Insurance",
+        "priceRange": "$20 - $200+ monthly",
+        "description": "Term or permanent life coverage options",
+        "timeEstimate": "1-2 hours for consultation"
+      },
+      {
+        "name": "Business Insurance",
+        "priceRange": "$500 - $2,000+ monthly",
+        "description": "Commercial property and liability coverage",
+        "timeEstimate": "1-3 hours for consultation"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Compare Coverage",
+        "description": "Review multiple quotes and coverage options before deciding",
+        "type": "do"
+      },
+      {
+        "title": "Check Ratings",
+        "description": "Verify company's financial strength and customer ratings",
+        "type": "do"
+      },
+      {
+        "title": "Underinsure Assets",
+        "description": "Maintain adequate coverage for full asset protection",
+        "type": "dont"
+      },
+      {
+        "title": "Policy Review",
+        "description": "Review coverage annually and after major life changes",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What factors affect insurance rates?",
+        "answer": "Insurance rates vary based on coverage type, risk factors, location, claim history, credit score (where applicable), and coverage limits. Discounts may be available for bundling policies or safety features."
+      },
+      {
+        "question": "How should customers choose an insurance company?",
+        "answer": "Consider the company's financial strength ratings, customer service reviews, claim handling reputation, policy options, and pricing. Look for licensed agents and verify state insurance department standing."
+      },
+      {
+        "question": "What's the claims process like?",
+        "answer": "Claims processes vary by company and type of claim. Most companies offer 24/7 claim reporting through phone, online, or mobile apps. Documentation requirements and processing times vary by claim type."
+      },
+      {
+        "question": "Are insurance agents required to be licensed?",
+        "answer": "Yes, insurance agents must be licensed in their state of operation. Many agents hold additional certifications for specialized coverage types. Licensing status can be verified through state insurance departments."
+      }
+    ]
+  },
+  "baby-store": {
+    "name": "Baby Store",
+    "description": "Retail establishments specializing in products for infants and young children. Local baby stores offer essential items including furniture, clothing, feeding supplies, safety equipment, and toys, often with knowledgeable staff to assist with product selection.",
+    "services": [
+      {
+        "name": "Baby Registry",
+        "priceRange": "Free Service",
+        "description": "Gift registry creation and management",
+        "timeEstimate": "30-60 minutes setup"
+      },
+      {
+        "name": "Car Seat Installation",
+        "priceRange": "$0 - $50",
+        "description": "Proper car seat fitting and installation",
+        "timeEstimate": "30-45 minutes"
+      },
+      {
+        "name": "Furniture Assembly",
+        "priceRange": "$50 - $200",
+        "description": "Assembly of cribs and other furniture",
+        "timeEstimate": "1-3 hours"
+      },
+      {
+        "name": "Personal Shopping",
+        "priceRange": "Free - $50",
+        "description": "Guided shopping assistance for essentials",
+        "timeEstimate": "30-60 minutes"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Research Safety Ratings",
+        "description": "Check product recalls and safety certifications",
+        "type": "do"
+      },
+      {
+        "title": "Compare Prices",
+        "description": "Research prices across multiple retailers",
+        "type": "do"
+      },
+      {
+        "title": "Skip Return Policy",
+        "description": "Understand return policies before major purchases",
+        "type": "dont"
+      },
+      {
+        "title": "Registry Deadlines",
+        "description": "Note completion discount dates for registries",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What essential items do baby stores typically carry?",
+        "answer": "Most baby stores stock cribs, car seats, strollers, feeding supplies, diapers, clothing, safety items, and toys. Many also offer specialty items like breast pumps and baby monitors."
+      },
+      {
+        "question": "How do baby registry programs work?",
+        "answer": "Registry programs allow creating lists of desired items, often with perks like completion discounts, price matching, and extended return periods. Some stores offer universal registries that include items from multiple retailers."
+      },
+      {
+        "question": "What safety certifications should products have?",
+        "answer": "Look for JPMA (Juvenile Products Manufacturers Association) certification on furniture and equipment. Car seats should meet federal safety standards and have current manufacture dates."
+      },
+      {
+        "question": "What services do baby stores typically offer?",
+        "answer": "Common services include registry assistance, car seat installation checks, furniture assembly, personal shopping assistance, and educational workshops. Available services vary by location."
+      }
+    ]
+  },
+  "funeral-home": {
+    "name": "Funeral Home",
+    "description": "Professional establishments providing funeral and memorial services for deceased loved ones. Local funeral homes offer comprehensive end-of-life services including funeral planning, burial or cremation arrangements, and grief support resources.",
+    "services": [
+      {
+        "name": "Traditional Funeral Service",
+        "priceRange": "$5,000 - $12,000",
+        "description": "Complete funeral service with viewing and burial",
+        "timeEstimate": "2-4 days process"
+      },
+      {
+        "name": "Cremation Service",
+        "priceRange": "$2,000 - $6,000",
+        "description": "Direct cremation or cremation with memorial",
+        "timeEstimate": "1-3 days process"
+      },
+      {
+        "name": "Memorial Service",
+        "priceRange": "$3,000 - $7,000",
+        "description": "Celebration of life or memorial ceremony",
+        "timeEstimate": "2-3 hours event"
+      },
+      {
+        "name": "Pre-Planning Services",
+        "priceRange": "Varies by plan",
+        "description": "Advance funeral arrangement planning",
+        "timeEstimate": "1-2 hours consultation"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Compare Services",
+        "description": "Request itemized price lists from multiple providers",
+        "type": "do"
+      },
+      {
+        "title": "Know Your Rights",
+        "description": "Understand the FTC Funeral Rule regarding pricing and options",
+        "type": "do"
+      },
+      {
+        "title": "Rush Decisions",
+        "description": "Take time to understand all options and costs",
+        "type": "dont"
+      },
+      {
+        "title": "Advanced Planning",
+        "description": "Consider pre-planning to reduce family stress",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What services do funeral homes typically provide?",
+        "answer": "Funeral homes typically provide death certificate filing, body preparation, ceremony planning, obituary assistance, coordination with cemeteries, and grief support resources. Many offer pre-planning services and monument selection."
+      },
+      {
+        "question": "What factors affect funeral costs?",
+        "answer": "Costs vary based on service type (burial vs. cremation), casket or urn selection, facility use, transportation needs, ceremony options, and additional services like flowers or programs. Pre-planning can often lock in current prices."
+      },
+      {
+        "question": "What are the legal requirements for funeral services?",
+        "answer": "Requirements vary by state but typically include proper death certificate filing, following health department regulations, and adhering to burial or cremation laws. Funeral homes must comply with FTC Funeral Rule regarding pricing disclosure."
+      },
+      {
+        "question": "How soon should arrangements be made?",
+        "answer": "While arrangements should begin shortly after death, many decisions can take time. Funeral homes typically provide 24/7 initial care, allowing families time to make detailed arrangements."
+      }
+    ]
+  },
+  "law-firm": {
+    "name": "Law Firm",
+    "description": "Professional legal service providers offering representation and counsel across various practice areas. Local law firms employ licensed attorneys specializing in different aspects of law, providing legal expertise for individuals and businesses.",
+    "services": [
+      {
+        "name": "Legal Consultation",
+        "priceRange": "$0 - $500",
+        "description": "Initial case evaluation and legal advice",
+        "timeEstimate": "30-60 minutes"
+      },
+      {
+        "name": "Document Preparation",
+        "priceRange": "$500 - $2,500",
+        "description": "Legal document drafting and review",
+        "timeEstimate": "1-2 weeks"
+      },
+      {
+        "name": "Court Representation",
+        "priceRange": "$2,000 - $10,000+",
+        "description": "Legal representation in court proceedings",
+        "timeEstimate": "Varies by case"
+      },
+      {
+        "name": "Settlement Negotiation",
+        "priceRange": "Percentage of settlement",
+        "description": "Legal negotiation of settlements",
+        "timeEstimate": "1-6 months"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Verify Credentials",
+        "description": "Confirm attorney licensing and specialization",
+        "type": "do"
+      },
+      {
+        "title": "Clear Communication",
+        "description": "Establish communication expectations and fee structure",
+        "type": "do"
+      },
+      {
+        "title": "Withhold Information",
+        "description": "Be completely honest with your attorney",
+        "type": "dont"
+      },
+      {
+        "title": "Fee Agreement",
+        "description": "Get all fee arrangements in writing",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How do law firms typically charge for services?",
+        "answer": "Fee structures vary by practice area and firm. Common arrangements include hourly rates ($150-$500+/hour), flat fees for specific services, contingency fees (percentage of recovery), or retainer agreements. Consultation fees and payment terms vary by firm."
+      },
+      {
+        "question": "What should clients look for in a law firm?",
+        "answer": "Consider the firm's experience in relevant practice areas, attorney credentials, reputation, communication style, and fee structure. Look for firms with clear communication policies and transparent billing practices."
+      },
+      {
+        "question": "How long do legal matters typically take?",
+        "answer": "Timeframes vary significantly by case type and complexity. Simple matters might resolve in weeks, while complex litigation can take years. Firms should provide estimated timelines based on case specifics."
+      },
+      {
+        "question": "What credentials should law firms have?",
+        "answer": "All practicing attorneys must be licensed by state bar associations. Many hold additional certifications in specific practice areas. Firms should carry professional liability insurance and maintain good standing with state bar associations."
+      }
+    ]
+  },
+  "air-conditioning-repair-service": {
+    "name": "Air Conditioning Repair Service",
+    "description": "Professional HVAC technicians specializing in air conditioning system repair, maintenance, and installation. Local AC repair services provide expert diagnostics, repairs, and preventive maintenance to keep your cooling system running efficiently.",
+    "services": [
+      {
+        "name": "AC Repair",
+        "priceRange": "$75 - $200",
+        "description": "Diagnostic and repair of AC system issues",
+        "timeEstimate": "1-3 hours"
+      },
+      {
+        "name": "Maintenance Service",
+        "priceRange": "$80 - $150",
+        "description": "Regular maintenance and system tune-up",
+        "timeEstimate": "1-2 hours"
+      },
+      {
+        "name": "Emergency Service",
+        "priceRange": "$150 - $300",
+        "description": "24/7 emergency AC repair service",
+        "timeEstimate": "Response within 2-4 hours"
+      },
+      {
+        "name": "System Inspection",
+        "priceRange": "$50 - $100",
+        "description": "Comprehensive AC system evaluation",
+        "timeEstimate": "30-60 minutes"
+      }
+    ],
+    "tips": [
+      {
+        "title": "Regular Maintenance",
+        "description": "Schedule annual maintenance to prevent major issues",
+        "type": "do"
+      },
+      {
+        "title": "Filter Changes",
+        "description": "Change or clean filters monthly during peak season",
+        "type": "do"
+      },
+      {
+        "title": "Ignore Strange Noises",
+        "description": "Address unusual sounds or performance issues promptly",
+        "type": "dont"
+      },
+      {
+        "title": "Professional Service",
+        "description": "Always use licensed and insured HVAC technicians",
+        "type": "important"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should AC systems be serviced?",
+        "answer": "Most manufacturers recommend annual maintenance service before the cooling season begins. Regular maintenance helps prevent breakdowns and extends system life."
+      },
+      {
+        "question": "What are common AC problems?",
+        "answer": "Common issues include insufficient cooling, strange noises, water leaks, high energy bills, and poor airflow. Many problems can be prevented with regular maintenance."
+      },
+      {
+        "question": "How long do AC repairs typically take?",
+        "answer": "Most repairs can be completed in 1-3 hours, depending on the issue. Complex problems or part replacements may require additional time."
+      },
+      {
+        "question": "What affects repair costs?",
+        "answer": "Repair costs vary based on the problem severity, required parts, labor time, and service call fees. Emergency or after-hours service typically costs more."
+      }
+    ]
+  }
+}
