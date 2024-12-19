@@ -31,6 +31,10 @@ export const metadata = {
       { url: '/favicon/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
   },
+  other: {
+    'shortcut icon': '/favicon/favicon.ico',
+    'msapplication-TileImage': '/favicon/favicon.ico',
+  }
 }
 
 export default async function RootLayout({
