@@ -195,18 +195,26 @@ async function generateStaticSitemap() {
     { url: 'privacy', priority: 0.5 },
     { url: 'terms', priority: 0.5 }
   ]
+
+  const builder = new Builder({
+    xmldec: { version: '1.0', encoding: 'UTF-8' }
+  })
   
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${staticUrls.map(({ url, priority }) => `
-      <url>
-        <loc>${BASE_URL}${url ? `/${url}` : ''}</loc>
-        <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-        <changefreq>${SITEMAP_CONFIG.static.changefreq}</changefreq>
-        <priority>${priority}</priority>
-      </url>
-    `).join('')}
-  </urlset>`
+  const sitemapObj = {
+    urlset: {
+      $: {
+        xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9'
+      },
+      url: staticUrls.map(({ url, priority }) => ({
+        loc: [BASE_URL + (url ? `/${url}` : '')],
+        lastmod: [new Date().toISOString().split('T')[0]],
+        changefreq: [SITEMAP_CONFIG.static.changefreq],
+        priority: [priority.toString()]
+      }))
+    }
+  }
+
+  const sitemap = builder.buildObject(sitemapObj)
   
   const filename = 'static.xml'
   const filePath = path.join(SITEMAP_DIR, filename)
