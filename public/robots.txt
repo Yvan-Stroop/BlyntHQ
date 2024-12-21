@@ -51,9 +51,6 @@ Disallow: /*/categories/*      # Wrong categories position
 Disallow: /category/*          # Wrong singular form
 Disallow: /location/*          # Wrong singular form
 Disallow: /business/*          # Wrong business URL pattern
-Disallow: /*?*sort=
-Disallow: /*?*filter=
-Disallow: /*?*q=
 Disallow: /*preview=true
 Disallow: /*edit=true
 
