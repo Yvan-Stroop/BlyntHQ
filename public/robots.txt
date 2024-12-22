@@ -1,6 +1,9 @@
 # Global rules
 User-agent: *
 
+# Note: This site is served over HTTPS
+# The canonical version is https://getblynt.com
+
 # Allow crawling of valid paths
 Allow: /
 Allow: /categories/
@@ -69,7 +72,7 @@ Disallow: /
 User-agent: CCBot
 Disallow: /
 
-# Sitemaps
+# Sitemaps (HTTPS is required)
 Sitemap: https://getblynt.com/sitemap_index.xml
 
 # Crawl-delay for heavy crawlers
