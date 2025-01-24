@@ -70,11 +70,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Get country from headers
-  const countryCode = request.headers.get('x-vercel-ip-country')
-  
+  // Get country from headers - try multiple possible headers
+  const countryCode = 
+    request.headers.get('cf-ipcountry') || // Cloudflare
+    request.headers.get('x-vercel-ip-country') || // Vercel
+    request.headers.get('x-country-code') || // Generic
+    request.headers.get('x-forwarded-country') // Alternative generic
+
   // Block if from restricted countries
-  if (countryCode && BLOCKED_COUNTRIES.includes(countryCode)) {
+  if (countryCode && BLOCKED_COUNTRIES.includes(countryCode.toUpperCase())) {
     return new NextResponse('Access denied: This service is not available in your region.', {
       status: 403,
       headers: {
