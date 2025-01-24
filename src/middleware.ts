@@ -7,6 +7,9 @@ import { loadCategoriesFromCSV, loadLocationsFromCSV } from './lib/csv'
 let categoriesCache: Array<{ name: string; slug: string }> | null = null
 let locationsCache: Array<{ city: string; state: string; state_abbr: string }> | null = null
 
+// List of blocked countries
+const BLOCKED_COUNTRIES = ['DE', 'IR', 'RU', 'IN'] // Germany, Iran, Russia, India
+
 // Function to load and cache data
 async function ensureCacheLoaded() {
   if (!categoriesCache) {
@@ -17,7 +20,7 @@ async function ensureCacheLoaded() {
   }
 }
 
-// Helper function to find closest matching category
+// Helper function to find closest category
 function findClosestCategory(categorySlug: string): string | null {
   if (!categoriesCache) return null
   
@@ -65,6 +68,19 @@ export async function middleware(request: NextRequest) {
   // Skip all middleware in development
   if (process.env.NODE_ENV === 'development') {
     return NextResponse.next()
+  }
+
+  // Get country from headers
+  const countryCode = request.headers.get('x-vercel-ip-country')
+  
+  // Block if from restricted countries
+  if (countryCode && BLOCKED_COUNTRIES.includes(countryCode)) {
+    return new NextResponse('Access denied: This service is not available in your region.', {
+      status: 403,
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+    })
   }
 
   const url = request.nextUrl
